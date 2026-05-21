@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocConverter — File Conversion Tool</title>
+
+<!-- Real conversion libraries loaded from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
+<script src="https://unpkg.com/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f11;
+    --surface: #17171a;
+    --surface2: #1e1e22;
+    --surface3: #28282e;
+    --border: #2e2e36;
+    --border2: #3e3e4a;
+    --text: #f0f0f4;
+    --text2: #9090a0;
+    --text3: #606070;
+    --accent: #7c6ef7;
+    --accent-dim: #7c6ef720;
+    --accent-border: #7c6ef750;
+    --green: #34d399;
+    --green-dim: #34d39920;
+    --red: #f87171;
+    --red-dim: #f8717120;
+    --yellow: #fbbf24;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { color: var(--text2); margin-top: 8px; font-size: 15px; }
+
+  /* Layout */
+  .layout {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 6px; }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 0 4px;
+    margin-bottom: 6px;
+  }
+
+  .conv-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    width: 100%;
+  }
+  .conv-btn:hover { border-color: var(--border2); background: var(--surface2); }
+  .conv-btn.active { border-color: var(--accent-border); background: var(--accent-dim); }
+  .conv-btn .icon { font-size: 22px; flex-shrink: 0; }
+  .conv-btn .info { min-width: 0; }
+  .conv-btn .name { font-size: 12px; font-weight: 700; color: var(--text); }
+  .conv-btn .desc { font-size: 11px; color: var(--text2); margin-top: 2px; line-height: 1.3; }
+  .conv-btn .badge {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-weight: 600;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* Panel */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    min-height: 340px;
+  }
+
+  /* Drop zone */
+  .dropzone {
+    border: 2px dashed var(--border2);
+    border-radius: 14px;
+    padding: 52px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dropzone:hover, .dropzone.active {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .dropzone .dz-icon { font-size: 42px; margin-bottom: 14px; }
+  .dropzone h3 { font-size: 15px; font-weight: 600; color: var(--text); }
+  .dropzone p { font-size: 12px; color: var(--text2); margin-top: 6px; }
+  .dropzone .accept-label {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 4px 12px;
+    background: var(--surface3);
+    border-radius: 99px;
+    color: var(--text2);
+    border: 1px solid var(--border);
+  }
+
+  /* File preview */
+  .file-preview {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .file-preview .file-icon { font-size: 28px; flex-shrink: 0; }
+  .file-preview .file-info { flex: 1; min-width: 0; }
+  .file-preview .file-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-preview .file-meta { font-size: 11px; color: var(--text2); margin-top: 3px; }
+  .file-preview .remove-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--text3); font-size: 18px; padding: 4px; border-radius: 6px;
+    transition: color 0.15s;
+  }
+  .file-preview .remove-btn:hover { color: var(--red); }
+
+  /* Quality selector */
+  .quality-wrap { margin-bottom: 20px; }
+  .quality-label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+  .quality-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .quality-opt {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    color: var(--text2);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .quality-opt.selected { border-color: var(--accent-border); background: var(--accent-dim); color: var(--text); font-weight: 600; }
+
+  /* Convert button */
+  .convert-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.2px;
+  }
+  .convert-btn:hover { opacity: 0.9; }
+  .convert-btn:active { transform: scale(0.99); }
+  .convert-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Progress */
+  .progress-wrap { padding: 12px 0; }
+  .progress-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .progress-label { font-size: 13px; font-weight: 600; }
+  .progress-pct { font-size: 13px; color: var(--accent); font-weight: 700; }
+  .progress-bar-bg { background: var(--surface3); border-radius: 99px; height: 8px; overflow: hidden; }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #7c6ef7, #60a5fa);
+    transition: width 0.3s ease;
+  }
+  .progress-sub { font-size: 12px; color: var(--text3); text-align: center; margin-top: 14px; }
+
+  /* Success */
+  .success-box {
+    background: var(--green-dim);
+    border: 1px solid #34d39940;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .success-box .s-icon { font-size: 30px; }
+  .success-box h3 { font-size: 14px; font-weight: 700; color: var(--green); }
+  .success-box p { font-size: 12px; color: var(--text2); margin-top: 3px; }
+
+  /* Buttons row */
+  .btn-row { display: flex; gap: 10px; }
+  .dl-btn {
+    flex: 1;
+    padding: 13px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+  }
+  .dl-btn:hover { opacity: 0.9; }
+  .another-btn {
+    padding: 13px 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text2);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .another-btn:hover { color: var(--text); border-color: var(--border); }
+
+  /* Error */
+  .error-box {
+    background: var(--red-dim);
+    border: 1px solid #f8717140;
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .error-box h3 { color: var(--red); font-size: 14px; margin-bottom: 8px; }
+  .error-box p { font-size: 12px; color: var(--text2); margin-bottom: 14px; }
+  .retry-btn {
+    padding: 8px 22px;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* Empty panel */
+  .empty-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 280px; gap: 12px; }
+  .empty-panel .e-icon { font-size: 48px; opacity: 0.3; }
+  .empty-panel p { color: var(--text3); font-size: 14px; }
+
+  /* Info cards */
+  .info-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+  .info-card .i-icon { font-size: 20px; margin-bottom: 6px; }
+  .info-card .i-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .info-card .i-desc { font-size: 11px; color: var(--text3); line-height: 1.4; }
+
+  /* Panel header */
+  .panel-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+  .panel-header .ph-icon { font-size: 30px; }
+  .panel-header h2 { font-size: 16px; font-weight: 700; }
+  .panel-header p { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+  /* Spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { width: 16px; height: 16px; border: 2px solid transparent; border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+
+  /* Log messages */
+  .log { font-size: 11px; color: var(--text3); margin-top: 10px; font-family: monospace; min-height: 16px; text-align: center; }
+
+  @media (max-width: 640px) {
+    .layout { grid-template-columns: 1fr; }
+    .info-row { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ DocConverter</h1>
+  <p>Convert, transform, and compress your documents — real conversions, right in your browser</p>
+</div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-label">Choose conversion</div>
+
+    <button class="conv-btn" data-id="pdf-to-png" onclick="selectConv('pdf-to-png')">
+      <span class="icon">🖼️</span>
+      <div class="info">
+        <div class="name">PDF → PNG</div>
+        <div class="desc">Extract each page as an image</div>
+        <span class="badge" style="background:#7c6ef720;color:#a78bfa;border:1px solid #7c6ef740">PDF input</span>
+      </div>
+    </button>
+
+    <button class="conv-btn" data-id="png-to-pdf" onclick="selectConv('png-to-pdf')">
+      <span class="icon">📄</span>
+      <div class="info">
+        <div class="name">Image → PDF</div>
+        <div class="desc">Embed PNG/JPG into a real PDF</div>
+        <span class="badge" style="background:#2563eb20;color:#60a5fa;border:1px solid #2563eb40">Image input</span>
+      </div>
+    </button>
+
+    <button class="conv-btn" data-id="word-to-pdf" onclick="selectConv('word-to-pdf')">
+      <span class="icon">📑</span>
+      <div class="info">
+        <div class="name">Word → PDF</div>
+        <div class="desc">Convert DOCX to a PDF document</div>
+        <span class="badge" style="background:#7c3aed20;color:#a78bfa;border:1px solid #7c3aed40">DOCX input</span>
+      </div>
+    </button>
+
+    <button class="conv-btn" data-id="pdf-to-word" onclick="selectConv('pdf-to-word')">
+      <span class="icon">📝</span>
+      <div class="info">
+        <div class="name">PDF → Word</div>
+        <div class="desc">Extract text into a .docx file</div>
+        <span class="badge" style="background:#0891b220;color:#22d3ee;border:1px solid #0891b240">PDF input</span>
+      </div>
+    </button>
+
+    <button class="conv-btn" data-id="compress" onclick="selectConv('compress')">
+      <span class="icon">🗜️</span>
+      <div class="info">
+        <div class="name">Compress File</div>
+        <div class="desc">Reduce size of PDF or images</div>
+        <span class="badge" style="background:#05966920;color:#34d399;border:1px solid #05966940">Any file</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Right panel -->
+  <div>
+    <div class="panel" id="main-panel">
+      <div class="empty-panel">
+        <div class="e-icon">👈</div>
+        <p>Select a conversion type to get started</p>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-card">
+        <div class="i-icon">🔒</div>
+        <div class="i-title">100% Private</div>
+        <div class="i-desc">All processing happens in your browser — nothing is uploaded</div>
+      </div>
+      <div class="info-card">
+        <div class="i-icon">⚡</div>
+        <div class="i-title">Real Conversions</div>
+        <div class="i-desc">Powered by pdf.js, pdf-lib, mammoth.js and docx.js</div>
+      </div>
+      <div class="info-card">
+        <div class="i-icon">🆓</div>
+        <div class="i-title">Completely Free</div>
+        <div class="i-desc">No sign-up, no watermarks, no file size tricks</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="file-input" style="display:none" onchange="handleFileInputChange(event)">
+
+<script>
+// ─── State ───────────────────────────────────────────────────────────────────
+let currentConv = null;
+let currentFile = null;
+let quality = 2; // 0=low,1=med,2=high,3=max
+let resultBlob = null;
+let resultName = '';
+
+const CONVS = {
+  'pdf-to-png': { icon:'🖼️', title:'PDF → PNG', desc:'Extracts every page as a PNG image', accepts:'.pdf', fromLabel:'PDF' },
+  'png-to-pdf': { icon:'📄', title:'Image → PDF', desc:'Embeds your image into a real PDF file', accepts:'.png,.jpg,.jpeg,.webp,.gif', fromLabel:'Image' },
+  'word-to-pdf': { icon:'📑', title:'Word → PDF', desc:'Converts your DOCX document to PDF', accepts:'.docx', fromLabel:'DOCX' },
+  'pdf-to-word': { icon:'📝', title:'PDF → Word', desc:'Extracts PDF text into a .docx file', accepts:'.pdf', fromLabel:'PDF' },
+  'compress': { icon:'🗜️', title:'Compress File', desc:'Reduces file size while preserving quality', accepts:'.pdf,.png,.jpg,.jpeg,.webp', fromLabel:'File' }
+};
+
+const QUALITY_LABELS = ['Low (smallest)', 'Medium', 'High', 'Maximum'];
+
+// ─── UI Helpers ───────────────────────────────────────────────────────────────
+function setLog(msg) {
+  const el = document.getElementById('log-msg');
+  if (el) el.textContent = msg;
+}
+
+function setProgress(pct, label) {
+  const bar = document.getElementById('prog-fill');
+  const lbl = document.getElementById('prog-label');
+  const pctEl = document.getElementById('prog-pct');
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) lbl.textContent = label || 'Processing…';
+  if (pctEl) pctEl.textContent = Math.round(pct) + '%';
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/1048576).toFixed(2) + ' MB';
+}
+
+function selectConv(id) {
+  currentConv = id;
+  currentFile = null;
+  resultBlob = null;
+  quality = 2;
+
+  // Update sidebar active state
+  document.querySelectorAll('.conv-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-id="${id}"]`).classList.add('active');
+
+  renderPanel('upload');
+}
+
+function renderPanel(state) {
+  const conv = CONVS[currentConv];
+  const panel = document.getElementById('main-panel');
+
+  if (state === 'upload') {
+    panel.innerHTML = `
+      <div class="panel-header">
+        <span class="ph-icon">${conv.icon}</span>
+        <div>
+          <h2>${conv.title}</h2>
+          <p>${conv.desc}</p>
+        </div>
+      </div>
+      <div class="dropzone" id="dropzone"
+        ondragover="event.preventDefault();this.classList.add('active')"
+        ondragleave="this.classList.remove('active')"
+        ondrop="handleDrop(event)"
+        onclick="triggerFileInput()">
+        <div class="dz-icon">📂</div>
+        <h3>Drop your file here</h3>
+        <p>or click to browse</p>
+        <span class="accept-label">${conv.accepts.replace(/\./g,'').toUpperCase().replace(/,/g,' · ')}</span>
+      </div>
+    `;
+    document.getElementById('file-input').accept = conv.accepts;
+  }
+
+  if (state === 'ready') {
+    const qOpts = currentConv === 'compress' ? `
+      <div class="quality-wrap">
+        <div class="quality-label">Compression quality</div>
+        <div class="quality-opts">
+          ${QUALITY_LABELS.map((q,i) => `<button class="quality-opt ${i===quality?'selected':''}" onclick="setQuality(${i})">${q}</button>`).join('')}
+        </div>
+      </div>` : '';
+    panel.innerHTML = `
+      <div class="panel-header">
+        <span class="ph-icon">${conv.icon}</span>
+        <div><h2>${conv.title}</h2><p>${conv.desc}</p></div>
+      </div>
+      <div class="file-preview">
+        <span class="file-icon">📄</span>
+        <div class="file-info">
+          <div class="file-name">${currentFile.name}</div>
+          <div class="file-meta">${formatSize(currentFile.size)} &nbsp;·&nbsp; ${currentFile.type || 'unknown'}</div>
+        </div>
+        <button class="remove-btn" onclick="resetFile()">✕</button>
+      </div>
+      ${qOpts}
+      <button class="convert-btn" id="conv-btn" onclick="startConversion()">
+        Convert ${conv.fromLabel} → ${conv.title.split('→')[1]?.trim() || 'file'}
+      </button>
+    `;
+  }
+
+  if (state === 'processing') {
+    panel.innerHTML = `
+      <div class="panel-header">
+        <span class="ph-icon">${conv.icon}</span>
+        <div><h2>${conv.title}</h2><p>Converting your file…</p></div>
+      </div>
+      <div style="padding:20px 0">
+        <div class="progress-wrap">
+          <div class="progress-header">
+            <span class="progress-label" id="prog-label">Starting…</span>
+            <span class="progress-pct" id="prog-pct">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
+          </div>
+          <div class="log" id="log-msg">Loading libraries…</div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (state === 'done') {
+    panel.innerHTML = `
+      <div class="panel-header">
+        <span class="ph-icon">${conv.icon}</span>
+        <div><h2>${conv.title}</h2><p>Conversion complete!</p></div>
+      </div>
+      <div class="success-box">
+        <span class="s-icon">✅</span>
+        <div>
+          <h3>Ready to download</h3>
+          <p>${resultName}</p>
+        </div>
+      </div>
+      <div class="btn-row">
+        <a class="dl-btn" id="dl-link" href="#">⬇ Download File</a>
+        <button class="another-btn" onclick="resetAll()">Convert another</button>
+      </div>
+    `;
+    // Attach blob URL
+    const url = URL.createObjectURL(resultBlob);
+    const dlLink = document.getElementById('dl-link');
+    dlLink.href = url;
+    dlLink.download = resultName;
+  }
+
+  if (state === 'error') {
+    panel.innerHTML = `
+      <div class="panel-header">
+        <span class="ph-icon">${conv.icon}</span>
+        <div><h2>${conv.title}</h2><p>Something went wrong</p></div>
+      </div>
+      <div class="error-box">
+        <h3>⚠ Conversion failed</h3>
+        <p id="err-msg">An unexpected error occurred.</p>
+        <button class="retry-btn" onclick="renderPanel('ready')">Try again</button>
+      </div>
+    `;
+  }
+}
+
+function showError(msg) {
+  renderPanel('error');
+  const el = document.getElementById('err-msg');
+  if (el) el.textContent = msg;
+}
+
+// ─── File Handling ────────────────────────────────────────────────────────────
+function triggerFileInput() {
+  document.getElementById('file-input').click();
+}
+
+function handleFileInputChange(e) {
+  if (e.target.files[0]) receiveFile(e.target.files[0]);
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('dropzone')?.classList.remove('active');
+  if (e.dataTransfer.files[0]) receiveFile(e.dataTransfer.files[0]);
+}
+
+function receiveFile(file) {
+  currentFile = file;
+  renderPanel('ready');
+}
+
+function resetFile() {
+  currentFile = null;
+  renderPanel('upload');
+}
+
+function resetAll() {
+  currentFile = null;
+  resultBlob = null;
+  renderPanel('ready');
+  // Actually go back to upload
+  renderPanel('upload');
+}
+
+function setQuality(q) {
+  quality = q;
+  renderPanel('ready');
+}
+
+// ─── Conversion Dispatcher ────────────────────────────────────────────────────
+async function startConversion() {
+  renderPanel('processing');
+  try {
+    if (currentConv === 'pdf-to-png')   await convertPdfToPng();
+    else if (currentConv === 'png-to-pdf') await convertImageToPdf();
+    else if (currentConv === 'word-to-pdf') await convertWordToPdf();
+    else if (currentConv === 'pdf-to-word') await convertPdfToWord();
+    else if (currentConv === 'compress')  await compressFile();
+  } catch(err) {
+    console.error(err);
+    showError(err.message || 'Conversion failed. Check the console for details.');
+  }
+}
+
+// ─── PDF → PNG ────────────────────────────────────────────────────────────────
+async function convertPdfToPng() {
+  setProgress(5, 'Loading PDF…'); setLog('Initialising pdf.js…');
+
+  if (!window.pdfjsLib) throw new Error('pdf.js not loaded. Please open this file in a browser with internet access.');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  const arrayBuffer = await currentFile.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  const totalPages = pdf.numPages;
+  setLog(`Found ${totalPages} page(s)`);
+
+  // For a single page, output PNG directly.
+  // For multiple pages, we zip them using a simple multi-image PDF approach instead.
+  if (totalPages === 1) {
+    setProgress(30, 'Rendering page…');
+    const page = await pdf.getPage(1);
+    const scale = quality === 0 ? 1 : quality === 1 ? 1.5 : quality === 2 ? 2 : 3;
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width; canvas.height = viewport.height;
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+    setProgress(85, 'Encoding PNG…');
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    setProgress(100, 'Done!');
+    resultBlob = blob;
+    resultName = currentFile.name.replace('.pdf','') + '_page1.png';
+    renderPanel('done');
+  } else {
+    // Multiple pages → produce a ZIP-less bundle by creating one PNG per page and packaging as first page
+    const blobs = [];
+    for (let i = 1; i <= totalPages; i++) {
+      setProgress(10 + (i/totalPages)*80, `Rendering page ${i}/${totalPages}…`);
+      setLog(`Page ${i} of ${totalPages}`);
+      const page = await pdf.getPage(i);
+      const scale = quality === 0 ? 1 : quality === 1 ? 1.5 : quality === 2 ? 2 : 3;
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width; canvas.height = viewport.height;
+      await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      blobs.push(blob);
+    }
+    // Stitch all canvases into one tall PNG
+    setProgress(92, 'Combining pages…');
+    const images = await Promise.all(blobs.map(b => createImageBitmap(b)));
+    const totalH = images.reduce((h,img) => h + img.height, 0);
+    const maxW = Math.max(...images.map(img => img.width));
+    const canvas = document.createElement('canvas');
+    canvas.width = maxW; canvas.height = totalH;
+    const ctx = canvas.getContext('2d');
+    let y = 0;
+    for (const img of images) { ctx.drawImage(img, 0, y); y += img.height; }
+    setProgress(99, 'Encoding…');
+    const finalBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    setProgress(100, 'Done!');
+    resultBlob = finalBlob;
+    resultName = currentFile.name.replace('.pdf','') + '_all_pages.png';
+    renderPanel('done');
+  }
+}
+
+// ─── Image → PDF ──────────────────────────────────────────────────────────────
+async function convertImageToPdf() {
+  setProgress(10, 'Loading image…'); setLog('Reading file…');
+  if (!window.PDFLib) throw new Error('pdf-lib not loaded. Please open this file in a browser with internet access.');
+
+  const arrayBuffer = await currentFile.arrayBuffer();
+  setProgress(30, 'Creating PDF…');
+
+  const pdfDoc = await PDFLib.PDFDocument.create();
+  let imageEmbed;
+  const ext = currentFile.name.split('.').pop().toLowerCase();
+
+  if (ext === 'jpg' || ext === 'jpeg') {
+    imageEmbed = await pdfDoc.embedJpg(arrayBuffer);
+  } else {
+    // PNG, WEBP, GIF → convert to PNG via canvas first
+    setLog('Converting to PNG format…');
+    const blob = new Blob([arrayBuffer], { type: currentFile.type });
+    const imgBitmap = await createImageBitmap(blob);
+    const canvas = document.createElement('canvas');
+    canvas.width = imgBitmap.width; canvas.height = imgBitmap.height;
+    canvas.getContext('2d').drawImage(imgBitmap, 0, 0);
+    const pngBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const pngBuffer = await pngBlob.arrayBuffer();
+    imageEmbed = await pdfDoc.embedPng(pngBuffer);
+  }
+
+  setProgress(65, 'Building PDF page…');
+  const page = pdfDoc.addPage([imageEmbed.width, imageEmbed.height]);
+  page.drawImage(imageEmbed, { x: 0, y: 0, width: imageEmbed.width, height: imageEmbed.height });
+
+  setProgress(90, 'Saving PDF…');
+  const pdfBytes = await pdfDoc.save();
+  setProgress(100, 'Done!');
+
+  resultBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+  resultName = currentFile.name.replace(/\.[^.]+$/, '') + '_converted.pdf';
+  renderPanel('done');
+}
+
+// ─── Word → PDF ───────────────────────────────────────────────────────────────
+async function convertWordToPdf() {
+  setProgress(10, 'Reading DOCX…'); setLog('Parsing Word document…');
+  if (!window.mammoth) throw new Error('mammoth.js not loaded. Please open this file in a browser with internet access.');
+  if (!window.PDFLib) throw new Error('pdf-lib not loaded.');
+
+  const arrayBuffer = await currentFile.arrayBuffer();
+  setProgress(30, 'Extracting content…');
+
+  const result = await mammoth.extractRawText({ arrayBuffer });
+  const text = result.value;
+  setLog(`Extracted ${text.length} characters`);
+
+  setProgress(55, 'Building PDF…');
+  const pdfDoc = await PDFLib.PDFDocument.create();
+  const { StandardFonts } = PDFLib;
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  const PAGE_W = 595, PAGE_H = 842;
+  const MARGIN = 60, LINE_H = 18, FONT_SIZE = 11;
+  const maxWidth = PAGE_W - MARGIN * 2;
+
+  // Split text into words, wrap into lines
+  const paragraphs = text.split('\n');
+  const allLines = [];
+  for (const para of paragraphs) {
+    if (!para.trim()) { allLines.push(''); continue; }
+    const words = para.split(' ');
+    let line = '';
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      const w = font.widthOfTextAtSize(test, FONT_SIZE);
+      if (w > maxWidth && line) { allLines.push(line); line = word; }
+      else line = test;
+    }
+    if (line) allLines.push(line);
+  }
+
+  setProgress(75, `Laying out ${allLines.length} lines…`);
+  let page = pdfDoc.addPage([PAGE_W, PAGE_H]);
+  let y = PAGE_H - MARGIN;
+
+  for (const line of allLines) {
+    if (y < MARGIN + LINE_H) {
+      page = pdfDoc.addPage([PAGE_W, PAGE_H]);
+      y = PAGE_H - MARGIN;
+    }
+    if (line) {
+      page.drawText(line, { x: MARGIN, y, font, size: FONT_SIZE, color: PDFLib.rgb(0.05, 0.05, 0.05) });
+    }
+    y -= LINE_H;
+  }
+
+  setProgress(92, 'Saving PDF…');
+  const pdfBytes = await pdfDoc.save();
+  setProgress(100, 'Done!');
+
+  resultBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+  resultName = currentFile.name.replace('.docx','').replace('.doc','') + '_converted.pdf';
+  renderPanel('done');
+}
+
+// ─── PDF → Word ───────────────────────────────────────────────────────────────
+async function convertPdfToWord() {
+  setProgress(5, 'Loading PDF…'); setLog('Initialising pdf.js…');
+  if (!window.pdfjsLib) throw new Error('pdf.js not loaded. Please open this file in a browser with internet access.');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  const arrayBuffer = await currentFile.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  const totalPages = pdf.numPages;
+  setLog(`Extracting text from ${totalPages} page(s)…`);
+
+  let allText = [];
+  for (let i = 1; i <= totalPages; i++) {
+    setProgress(10 + (i / totalPages) * 50, `Reading page ${i}/${totalPages}…`);
+    const page = await pdf.getPage(i);
+    const textContent = await page.getTextContent();
+    const pageText = textContent.items.map(item => item.str).join(' ');
+    allText.push(`--- Page ${i} ---\n${pageText}`);
+  }
+
+  setProgress(65, 'Building DOCX…');
+  setLog('Assembling Word document…');
+
+  if (!window.docx) throw new Error('docx.js not loaded. Please open this file in a browser with internet access.');
+
+  const { Document, Paragraph, TextRun, HeadingLevel, Packer } = window.docx;
+
+  const children = [];
+  // Title
+  children.push(new Paragraph({
+    text: currentFile.name.replace('.pdf',''),
+    heading: HeadingLevel.TITLE
+  }));
+
+  for (const section of allText) {
+    const lines = section.split('\n');
+    for (const line of lines) {
+      if (line.startsWith('--- Page')) {
+        children.push(new Paragraph({
+          text: line,
+          heading: HeadingLevel.HEADING_2
+        }));
+      } else if (line.trim()) {
+        // Split into ~100-char sentences for readability
+        const sentences = line.match(/.{1,120}(\s|$)/g) || [line];
+        for (const s of sentences) {
+          children.push(new Paragraph({ children: [new TextRun(s.trim())] }));
+        }
+      } else {
+        children.push(new Paragraph({ text: '' }));
+      }
+    }
+  }
+
+  const doc = new Document({ sections: [{ children }] });
+
+  setProgress(88, 'Packing DOCX file…');
+  const blob = await Packer.toBlob(doc);
+  setProgress(100, 'Done!');
+
+  resultBlob = blob;
+  resultName = currentFile.name.replace('.pdf','') + '_extracted.docx';
+  renderPanel('done');
+}
+
+// ─── Compress ─────────────────────────────────────────────────────────────────
+async function compressFile() {
+  const ext = currentFile.name.split('.').pop().toLowerCase();
+
+  if (['png','jpg','jpeg','webp'].includes(ext)) {
+    setProgress(10, 'Compressing image…'); setLog('Using browser-image-compression…');
+    if (!window.imageCompression) throw new Error('browser-image-compression not loaded.');
+
+    const maxSizeMB = [0.3, 0.8, 1.5, 3][quality];
+    const maxWidthOrHeight = [800, 1200, 1920, 4096][quality];
+
+    const options = {
+      maxSizeMB,
+      maxWidthOrHeight,
+      useWebWorker: true,
+      onProgress: (p) => setProgress(10 + p * 0.8, `Compressing… ${p}%`)
+    };
+
+    const compressed = await imageCompression(currentFile, options);
+    setProgress(100, 'Done!');
+    const savings = (((currentFile.size - compressed.size) / currentFile.size) * 100).toFixed(1);
+    resultBlob = compressed;
+    resultName = currentFile.name.replace(/\.[^.]+$/, '') + '_compressed.' + ext;
+    renderPanel('done');
+    // Show savings in success box
+    setTimeout(() => {
+      const el = document.querySelector('.success-box p');
+      if (el) el.textContent = `${resultName} · Saved ${savings}% (${formatSize(currentFile.size)} → ${formatSize(compressed.size)})`;
+    }, 100);
+
+  } else if (ext === 'pdf') {
+    setProgress(10, 'Loading PDF…'); setLog('Using pdf-lib compression…');
+    if (!window.PDFLib) throw new Error('pdf-lib not loaded.');
+
+    const arrayBuffer = await currentFile.arrayBuffer();
+    setProgress(40, 'Processing PDF…');
+    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+
+    setProgress(75, 'Saving with compression…');
+    const pdfBytes = await pdfDoc.save({ useObjectStreams: quality > 0, addDefaultPage: false });
+    setProgress(100, 'Done!');
+
+    const origSize = currentFile.size;
+    const newSize = pdfBytes.byteLength;
+    resultBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+    resultName = currentFile.name.replace('.pdf','') + '_compressed.pdf';
+    renderPanel('done');
+    setTimeout(() => {
+      const el = document.querySelector('.success-box p');
+      if (el) el.textContent = `${resultName} · ${formatSize(origSize)} → ${formatSize(newSize)}`;
+    }, 100);
+
+  } else {
+    throw new Error(`Compression not supported for .${ext} files. Try PNG, JPG, or PDF.`);
+  }
+}
+</script>
+</body>
+</html>
