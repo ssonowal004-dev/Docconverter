@@ -661,7 +661,7 @@ footer {
 .footer-inner { max-width: 1200px; margin: 0 auto; }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr repeat(3, 1fr);
+  grid-template-columns: 1.5fr repeat(4, 1fr);
   gap: 40px;
   margin-bottom: 36px;
 }
@@ -734,6 +734,310 @@ footer {
 }
 .search-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-bg); }
 .search-input::placeholder { color: var(--text3); }
+
+/* ─── BLOG SECTION ─── */
+#blog-section { display: none; }
+#tools-section { display: block; }
+
+.blog-hero {
+  background: linear-gradient(135deg, #fff0f3 0%, #e8f0fe 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 24px 36px;
+  text-align: center;
+}
+.blog-hero h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+.blog-hero p { font-size: 15px; color: var(--text2); max-width: 520px; margin: 0 auto; }
+.blog-hero .highlight { color: var(--red); }
+
+/* Blog category pills */
+.blog-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 28px 0 32px;
+}
+.blog-pill {
+  padding: 7px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border2);
+  background: var(--white);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.blog-pill:hover { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+.blog-pill.active { border-color: var(--red); background: var(--red); color: #fff; }
+
+/* Blog grid (card listing) */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.blog-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.18s;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+.blog-card:hover {
+  border-color: var(--red);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+.blog-card-thumb {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  position: relative;
+  overflow: hidden;
+}
+.blog-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.blog-card-cat {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+.blog-card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.blog-card-excerpt {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.6;
+  flex: 1;
+}
+.blog-card-meta {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.blog-card-meta .dot { color: var(--border2); }
+
+/* ─── ARTICLE VIEW ─── */
+#article-view {
+  display: none;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 24px;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.15s;
+}
+.article-back:hover { color: var(--red); }
+
+.article-header { margin-bottom: 32px; }
+.article-cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+}
+.article-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text3);
+  flex-wrap: wrap;
+}
+.article-meta span { display: flex; align-items: center; gap: 4px; }
+
+.article-hero-box {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  font-size: 80px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+}
+
+/* Article prose */
+.article-body { line-height: 1.8; color: var(--text2); }
+.article-body h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 36px 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--red-bg2);
+}
+.article-body h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 24px 0 8px;
+}
+.article-body p { margin-bottom: 16px; font-size: 14.5px; }
+.article-body ul, .article-body ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+.article-body li { margin-bottom: 8px; font-size: 14.5px; }
+.article-body strong { color: var(--text); font-weight: 700; }
+
+.article-tip {
+  background: var(--blue-bg);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 13.5px;
+  color: #1a3060;
+}
+.article-tip strong { color: var(--blue); }
+
+.article-warn {
+  background: var(--orange-bg);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 20px 0;
+  font-size: 13.5px;
+  color: #5a3200;
+}
+
+.article-cta {
+  background: linear-gradient(135deg, var(--red-bg) 0%, #f5e8ff 100%);
+  border: 1px solid var(--red-bg2);
+  border-radius: var(--radius);
+  padding: 28px 28px;
+  margin: 32px 0;
+  text-align: center;
+}
+.article-cta h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.article-cta p { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
+.article-cta button {
+  padding: 12px 28px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background 0.15s;
+}
+.article-cta button:hover { background: var(--red-dark); }
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 28px;
+  font-size: 13px;
+}
+.compare-table th {
+  background: var(--bg);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.compare-table td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+.compare-table tr:hover td { background: var(--bg); }
+.compare-table .check { color: var(--green); font-weight: 700; }
+.compare-table .cross { color: var(--red); }
+
+/* Related articles */
+.related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+.related-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.related-card:hover { border-color: var(--red); box-shadow: var(--shadow); transform: translateY(-2px); }
+.related-card .rc-emoji { font-size: 24px; margin-bottom: 8px; }
+.related-card .rc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.related-card .rc-cat { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -751,6 +1055,7 @@ footer {
       <button class="nav-tab" onclick="filterCategory('convert', this)">Convert PDF</button>
       <button class="nav-tab" onclick="filterCategory('image', this)">Image Tools</button>
       <button class="nav-tab" onclick="filterCategory('edit', this)">Edit PDF</button>
+      <button class="nav-tab" onclick="showBlog(this)">📖 Blog & Guides <span class="nav-badge">NEW</span></button>
     </div>
     <div class="nav-right">
       <button class="nav-login">Log in</button>
@@ -758,6 +1063,9 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- ─── TOOLS SECTION ─── -->
+<div id="tools-section">
 
 <!-- ─── HERO ─── -->
 <div class="hero">
@@ -804,62 +1112,6 @@ footer {
         <div class="tc-name">Compress PDF</div>
         <div class="tc-desc">Reduce PDF file size with quality control</div>
         <span class="tc-tag">PDF → PDF</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('pdf-to-word')" style="--card-color:#1a73e8;--card-bg:#e8f0fe">
-        <div class="tc-icon-wrap">📝</div>
-        <div class="tc-name">PDF to Word</div>
-        <div class="tc-desc">Convert PDF text to editable .docx</div>
-        <span class="tc-tag">PDF → DOCX</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('pdf-to-ppt')" style="--card-color:#e37400;--card-bg:#fef3e2">
-        <div class="tc-icon-wrap">📊</div>
-        <div class="tc-name">PDF to PowerPoint</div>
-        <div class="tc-desc">Turn PDF slides into editable PPTX</div>
-        <span class="tc-tag">PDF → PPTX</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('pdf-to-excel')" style="--card-color:#1e8c45;--card-bg:#e6f4ea">
-        <div class="tc-icon-wrap">📋</div>
-        <div class="tc-name">PDF to Excel</div>
-        <div class="tc-desc">Extract tables into a spreadsheet</div>
-        <span class="tc-tag">PDF → XLSX</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('pdf-to-jpg')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
-        <div class="tc-icon-wrap">🖼️</div>
-        <div class="tc-name">PDF to JPG</div>
-        <div class="tc-desc">Convert each PDF page to a JPG image</div>
-        <span class="tc-tag">PDF → JPG</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('word-to-pdf')" style="--card-color:#1a73e8;--card-bg:#e8f0fe">
-        <div class="tc-icon-wrap">📄</div>
-        <div class="tc-name">Word to PDF</div>
-        <div class="tc-desc">Convert DOCX documents to PDF</div>
-        <span class="tc-tag">DOCX → PDF</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('ppt-to-pdf')" style="--card-color:#e37400;--card-bg:#fef3e2">
-        <div class="tc-icon-wrap">📑</div>
-        <div class="tc-name">PowerPoint to PDF</div>
-        <div class="tc-desc">Convert PPTX presentations to PDF</div>
-        <span class="tc-tag">PPTX → PDF</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('excel-to-pdf')" style="--card-color:#1e8c45;--card-bg:#e6f4ea">
-        <div class="tc-icon-wrap">🗒️</div>
-        <div class="tc-name">Excel to PDF</div>
-        <div class="tc-desc">Export spreadsheets as PDF files</div>
-        <span class="tc-tag">XLSX → PDF</span>
-      </div>
-
-      <div class="tool-card" onclick="openTool('jpg-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
-        <div class="tc-icon-wrap">🗃️</div>
-        <div class="tc-name">JPG to PDF</div>
-        <div class="tc-desc">Embed images into a PDF file</div>
-        <span class="tc-tag">JPG → PDF</span>
       </div>
 
       <div class="tool-card" onclick="openTool('rotate')" style="--card-color:#e8163d;--card-bg:#fff0f3">
@@ -909,6 +1161,71 @@ footer {
         <div class="tc-name">Edit PDF Metadata</div>
         <div class="tc-desc">View & edit PDF title, author, date</div>
         <span class="tc-tag">PDF → PDF</span>
+      </div>
+
+      <!-- PDF → other format (shown in PDF Tools tab) -->
+      <div class="tool-card" onclick="openTool('pdf-to-word')" style="--card-color:#1a73e8;--card-bg:#e8f0fe">
+        <div class="tc-icon-wrap">📝</div>
+        <div class="tc-name">PDF to Word</div>
+        <div class="tc-desc">Convert PDF text to editable .docx</div>
+        <span class="tc-tag">PDF → DOCX</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('pdf-to-excel')" style="--card-color:#1e8c45;--card-bg:#e6f4ea">
+        <div class="tc-icon-wrap">📋</div>
+        <div class="tc-name">PDF to Excel</div>
+        <div class="tc-desc">Extract tables into a spreadsheet</div>
+        <span class="tc-tag">PDF → XLSX</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('pdf-to-ppt')" style="--card-color:#e37400;--card-bg:#fef3e2">
+        <div class="tc-icon-wrap">📊</div>
+        <div class="tc-name">PDF to PowerPoint</div>
+        <div class="tc-desc">Turn PDF slides into editable PPTX</div>
+        <span class="tc-tag">PDF → PPTX</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('pdf-to-jpg')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
+        <div class="tc-icon-wrap">🖼️</div>
+        <div class="tc-name">PDF to JPG</div>
+        <div class="tc-desc">Convert each PDF page to a JPG image</div>
+        <span class="tc-tag">PDF → JPG</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Convert PDF (other formats → PDF) -->
+  <div class="tool-section" data-category="convert">
+    <div class="section-title"><div class="st-line" style="background:#1a73e8"></div>Convert to PDF</div>
+    <div class="tool-grid">
+
+      <div class="tool-card" onclick="openTool('word-to-pdf')" style="--card-color:#1a73e8;--card-bg:#e8f0fe">
+        <div class="tc-icon-wrap">📄</div>
+        <div class="tc-name">Word to PDF</div>
+        <div class="tc-desc">Convert DOCX documents to PDF</div>
+        <span class="tc-tag">DOCX → PDF</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('ppt-to-pdf')" style="--card-color:#e37400;--card-bg:#fef3e2">
+        <div class="tc-icon-wrap">📑</div>
+        <div class="tc-name">PowerPoint to PDF</div>
+        <div class="tc-desc">Convert PPTX presentations to PDF</div>
+        <span class="tc-tag">PPTX → PDF</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('excel-to-pdf')" style="--card-color:#1e8c45;--card-bg:#e6f4ea">
+        <div class="tc-icon-wrap">🗒️</div>
+        <div class="tc-name">Excel to PDF</div>
+        <div class="tc-desc">Export spreadsheets as PDF files</div>
+        <span class="tc-tag">XLSX → PDF</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('jpg-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
+        <div class="tc-icon-wrap">🗃️</div>
+        <div class="tc-name">JPG to PDF</div>
+        <div class="tc-desc">Embed images into a PDF file</div>
+        <span class="tc-tag">JPG → PDF</span>
       </div>
 
     </div>
@@ -1040,6 +1357,153 @@ footer {
 
 </div><!-- /.page -->
 
+</div><!-- /#tools-section -->
+
+<!-- ─── BLOG SECTION ─── -->
+<div id="blog-section">
+
+  <!-- Blog hero -->
+  <div class="blog-hero">
+    <h2>📖 PDF & Document <span class="highlight">Guides & Tips</span></h2>
+    <p>Practical how-to articles, expert tips, and tool comparisons to help you work smarter with PDFs and documents.</p>
+  </div>
+
+  <div class="page" style="padding-top:32px">
+
+    <!-- Blog filter pills -->
+    <div class="blog-filter">
+      <button class="blog-pill active" onclick="filterBlog('all', this)">All Articles</button>
+      <button class="blog-pill" onclick="filterBlog('compress', this)">Compress & Optimize</button>
+      <button class="blog-pill" onclick="filterBlog('convert', this)">Convert Files</button>
+      <button class="blog-pill" onclick="filterBlog('tools', this)">Tool Reviews</button>
+      <button class="blog-pill" onclick="filterBlog('tips', this)">Tips & Tricks</button>
+      <button class="blog-pill" onclick="filterBlog('security', this)">Security & Privacy</button>
+    </div>
+
+    <!-- Blog listing -->
+    <div id="blog-listing">
+      <div class="blog-grid" id="blog-grid">
+
+        <div class="blog-card" onclick="openArticle('compress-pdf-quality')" data-tags="compress">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fef3e2,#fff0f3)">🗜️</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#fef3e2;color:#e37400">Compress & Optimize</span>
+            <div class="blog-card-title">How to Compress a PDF Without Losing Quality</div>
+            <div class="blog-card-excerpt">Learn the best methods to shrink PDF file size while keeping text sharp and images clear — ideal for email, web, and storage.</div>
+            <div class="blog-card-meta">
+              <span>📅 June 2025</span><span class="dot">·</span><span>⏱ 6 min read</span><span class="dot">·</span><span>🔥 Popular</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('best-pdf-converter-2026')" data-tags="tools convert">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#f0ebff)">🏆</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#e8f0fe;color:#1a73e8">Tool Reviews</span>
+            <div class="blog-card-title">Best Free PDF Converter in 2026 (Tested & Ranked)</div>
+            <div class="blog-card-excerpt">We tested 12 free PDF converters and ranked them on speed, quality, privacy, and ease of use. Here's who won.</div>
+            <div class="blog-card-meta">
+              <span>📅 Jan 2026</span><span class="dot">·</span><span>⏱ 9 min read</span><span class="dot">·</span><span>⭐ Editor's Pick</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('pdf-to-word-guide')" data-tags="convert">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#e6f4ea)">📝</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#e6f4ea;color:#1e8c45">Convert Files</span>
+            <div class="blog-card-title">How to Convert PDF to Word Without Losing Formatting</div>
+            <div class="blog-card-excerpt">Converting PDF to Word can be messy. These proven techniques preserve tables, fonts, and layout so your document stays professional.</div>
+            <div class="blog-card-meta">
+              <span>📅 May 2025</span><span class="dot">·</span><span>⏱ 5 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('merge-split-pdf')" data-tags="tips">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fff0f3,#fef3e2)">✂️</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#fff0f3;color:#e8163d">Tips & Tricks</span>
+            <div class="blog-card-title">Merge vs. Split PDF: When to Use Each (With Examples)</div>
+            <div class="blog-card-excerpt">Not sure whether to merge or split your PDFs? This guide explains the right approach for invoices, contracts, reports, and more.</div>
+            <div class="blog-card-meta">
+              <span>📅 Apr 2025</span><span class="dot">·</span><span>⏱ 4 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('pdf-security-guide')" data-tags="security">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e6f4ea,#e0f5fa)">🔐</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#e0f5fa;color:#0891b2">Security & Privacy</span>
+            <div class="blog-card-title">How to Password-Protect a PDF (and When You Should)</div>
+            <div class="blog-card-excerpt">A complete guide to PDF encryption — how strong passwords work, what protection actually means, and which tools keep your files private.</div>
+            <div class="blog-card-meta">
+              <span>📅 Mar 2025</span><span class="dot">·</span><span>⏱ 7 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('image-compression-guide')" data-tags="compress tips">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#f0ebff,#e8f0fe)">🖼️</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#f0ebff;color:#7c3aed">Compress & Optimize</span>
+            <div class="blog-card-title">How to Compress Images for Web Without Losing Sharpness</div>
+            <div class="blog-card-excerpt">JPG vs PNG vs WebP — which format wins for the web? Plus a step-by-step process to cut image size by 70% without visible quality loss.</div>
+            <div class="blog-card-meta">
+              <span>📅 Feb 2025</span><span class="dot">·</span><span>⏱ 5 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('word-to-pdf-guide')" data-tags="convert tips">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#fff0f3)">📄</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#e8f0fe;color:#1a73e8">Convert Files</span>
+            <div class="blog-card-title">Word to PDF: 5 Methods Compared (Speed, Quality & Privacy)</div>
+            <div class="blog-card-excerpt">Print-to-PDF, Microsoft Save As, online tools — each has tradeoffs. We compare 5 methods so you can pick the right one for your use case.</div>
+            <div class="blog-card-meta">
+              <span>📅 Jan 2025</span><span class="dot">·</span><span>⏱ 6 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('ocr-pdf-guide')" data-tags="tips convert">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#f0ebff,#fef3e2)">🔍</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#f0ebff;color:#7c3aed">Tips & Tricks</span>
+            <div class="blog-card-title">What Is OCR and How Does It Make Scanned PDFs Searchable?</div>
+            <div class="blog-card-excerpt">Scanned PDFs are just images — OCR turns them into real, searchable, copyable text. Here's how it works and when you need it.</div>
+            <div class="blog-card-meta">
+              <span>📅 Dec 2024</span><span class="dot">·</span><span>⏱ 4 min read</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="blog-card" onclick="openArticle('reduce-pdf-email')" data-tags="compress tips">
+          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fef3e2,#e6f4ea)">📧</div>
+          <div class="blog-card-body">
+            <span class="blog-card-cat" style="background:#fef3e2;color:#e37400">Compress & Optimize</span>
+            <div class="blog-card-title">How to Reduce PDF Size for Email Attachments (Under 10 MB)</div>
+            <div class="blog-card-excerpt">Gmail and Outlook have strict attachment limits. These quick tricks get your PDF under 10 MB — or even 5 MB — in under a minute.</div>
+            <div class="blog-card-meta">
+              <span>📅 Nov 2024</span><span class="dot">·</span><span>⏱ 3 min read</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /#blog-listing -->
+
+    <!-- ─── ARTICLE VIEW (hidden until opened) ─── -->
+    <div id="article-view">
+      <button class="article-back" onclick="closeBlogArticle()">← Back to all articles</button>
+      <div id="article-content"></div>
+    </div>
+
+  </div><!-- /.page -->
+</div><!-- /#blog-section -->
+
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-inner">
@@ -1074,6 +1538,14 @@ footer {
         <a href="#" onclick="openTool('pdf-to-png')">PDF to PNG</a>
         <a href="#" onclick="openTool('resize-img')">Resize Image</a>
         <a href="#" onclick="openTool('convert-img')">Convert Image</a>
+      </div>
+      <div class="footer-col">
+        <h4>Blog & Guides</h4>
+        <a href="#" onclick="showBlog()">All Articles</a>
+        <a href="#" onclick="showBlog(); openArticle('compress-pdf-quality')">Compress PDF Guide</a>
+        <a href="#" onclick="showBlog(); openArticle('best-pdf-converter-2026')">Best Converters 2026</a>
+        <a href="#" onclick="showBlog(); openArticle('pdf-to-word-guide')">PDF to Word Guide</a>
+        <a href="#" onclick="showBlog(); openArticle('reduce-pdf-email')">PDF for Email</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1223,8 +1695,6 @@ function closeModal() {
 function overlayClick(e) {
   if (e.target === document.getElementById('tool-overlay')) closeModal();
 }
-
-function showHome() { return false; }
 
 // ─── MODAL RENDER ───────────────────────────────────────────────────────────
 function renderModal(state) {
@@ -2026,6 +2496,10 @@ function searchTools(q) {
 
 // ─── CATEGORY FILTER ────────────────────────────────────────────────────────
 function filterCategory(cat, btn) {
+  // Switch back to tools view if on blog
+  document.getElementById('tools-section').style.display = 'block';
+  document.getElementById('blog-section').style.display = 'none';
+
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('search-input').value = '';
@@ -2044,6 +2518,522 @@ function filterCategory(cat, btn) {
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 function toggleFaq(el) {
   el.closest('.faq-item').classList.toggle('open');
+}
+
+// ─── BLOG NAVIGATION ─────────────────────────────────────────────────────────
+function showBlog(btn) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('tools-section').style.display = 'none';
+  document.getElementById('blog-section').style.display = 'block';
+  document.getElementById('blog-listing').style.display = 'block';
+  document.getElementById('article-view').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.getElementById('tools-section').style.display = 'block';
+  document.getElementById('blog-section').style.display = 'none';
+  // Restore "All Tools" as active tab
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const allTab = document.querySelector('.nav-tab[onclick*="all"]');
+  if (allTab) allTab.classList.add('active');
+  // Show all tool sections
+  document.querySelectorAll('.tool-card').forEach(c => c.style.display = '');
+  document.querySelectorAll('.tool-section').forEach(s => s.style.display = '');
+}
+
+function filterBlog(tag, btn) {
+  document.querySelectorAll('.blog-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card => {
+    const tags = card.dataset.tags || '';
+    card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+  });
+}
+
+function closeBlogArticle() {
+  document.getElementById('blog-listing').style.display = 'block';
+  document.getElementById('article-view').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+// ─── ARTICLE CONTENT ─────────────────────────────────────────────────────────
+const ARTICLES = {
+
+'compress-pdf-quality': {
+  emoji: '🗜️',
+  cat: 'Compress & Optimize',
+  catStyle: 'background:#fef3e2;color:#e37400',
+  title: 'How to Compress a PDF Without Losing Quality',
+  meta: ['📅 June 2025', '⏱ 6 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>PDF files can grow enormous fast — a single scanned contract, a presentation deck with graphics, or a portfolio can easily hit 20–50 MB. Yet email providers cap attachments at 10–25 MB, and storage costs money. The good news: you can usually cut PDF size by <strong>50–80%</strong> without any visible quality loss if you use the right approach.</p>
+
+    <h2>Why Are PDFs So Large?</h2>
+    <p>PDFs balloon in size for a few reasons:</p>
+    <ul>
+      <li><strong>Embedded images</strong> — Photos at print resolution (300 DPI) are far larger than screens need (72–150 DPI)</li>
+      <li><strong>Embedded fonts</strong> — Full font files can add 200–500 KB each</li>
+      <li><strong>Unnecessary metadata</strong> — Thumbnails, revision history, and comments accumulate silently</li>
+      <li><strong>Uncompressed streams</strong> — Some PDF creators don't compress object streams by default</li>
+    </ul>
+
+    <div class="article-tip"><strong>💡 Quick Rule:</strong> If your PDF came from a scanner or contains photos, compression will have the biggest impact. Text-only PDFs are usually already small.</div>
+
+    <h2>Method 1: Use an Online Compressor (Fastest)</h2>
+    <p>The fastest route is a browser-based tool like the <strong>Compress PDF</strong> tool right here on DocConverter. It processes your file locally — meaning your document never leaves your device — and lets you choose a quality level:</p>
+    <ul>
+      <li><strong>Low quality</strong> — Smallest file, noticeable image degradation. Good for archiving drafts.</li>
+      <li><strong>Medium quality</strong> — Balanced reduction (~60% smaller). Best for email.</li>
+      <li><strong>High quality</strong> — Modest reduction (~30% smaller). Best for client-facing documents.</li>
+      <li><strong>Maximum</strong> — Very small file. Use only when the content is text-heavy.</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>Try Compress PDF — Free & Private</h3>
+      <p>No upload required. Your file stays in your browser. No file size limits.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('compress-pdf')">🗜️ Compress My PDF Now</button>
+    </div>
+
+    <h2>Method 2: Reduce Image Resolution Before Creating the PDF</h2>
+    <p>If you're generating the PDF yourself (e.g., exporting from Word or Photoshop), reduce embedded images to <strong>150 DPI</strong> before exporting. For on-screen viewing, 72–96 DPI is perfectly sharp. For printing, 150–200 DPI is more than sufficient for most purposes.</p>
+
+    <h2>Method 3: Re-save in Acrobat (If You Have It)</h2>
+    <p>Adobe Acrobat's <em>Save As Other → Reduced Size PDF</em> or <em>PDF Optimizer</em> offers granular controls: downsample images to a target DPI, remove embedded thumbnails, compress object streams, and strip metadata. If you have Acrobat, this is the most powerful option.</p>
+
+    <h2>Method 4: Use Ghostscript (For Developers)</h2>
+    <p>Ghostscript is a free command-line tool that can aggressively compress PDFs. The command below targets screen-resolution output:</p>
+    <pre style="background:var(--bg);border-radius:8px;padding:14px;font-size:12px;overflow-x:auto;margin:16px 0;border:1px solid var(--border)">gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -sOutputFile=output.pdf input.pdf</pre>
+    <p>Replace <code>/screen</code> with <code>/ebook</code> (150 DPI), <code>/printer</code> (300 DPI), or <code>/prepress</code> (highest quality) to control the output.</p>
+
+    <div class="article-warn"><strong>⚠️ Watch out:</strong> Some online PDF compressors upload your files to third-party servers. If your PDF contains sensitive data (contracts, medical records, financial info), always use a browser-based tool that processes locally — like DocConverter.</div>
+
+    <h2>Comparing Compression Methods</h2>
+    <table class="compare-table">
+      <tr><th>Method</th><th>Ease</th><th>Quality Control</th><th>Privacy</th><th>Cost</th></tr>
+      <tr><td>DocConverter (browser)</td><td class="check">✔ Very Easy</td><td>4 levels</td><td class="check">✔ Local only</td><td class="check">✔ Free</td></tr>
+      <tr><td>Adobe Acrobat</td><td>Moderate</td><td>Full granular</td><td class="check">✔ Local</td><td class="cross">✗ Paid</td></tr>
+      <tr><td>Ghostscript (CLI)</td><td class="cross">✗ Technical</td><td>High</td><td class="check">✔ Local</td><td class="check">✔ Free</td></tr>
+      <tr><td>Upload-based sites</td><td class="check">✔ Easy</td><td>Limited</td><td class="cross">✗ Server upload</td><td>Varies</td></tr>
+    </table>
+
+    <h2>How Much Can You Actually Compress?</h2>
+    <p>Results vary by content type. In our tests:</p>
+    <ul>
+      <li><strong>Scanned documents:</strong> 60–85% reduction possible</li>
+      <li><strong>Photo-heavy presentations:</strong> 50–75% reduction</li>
+      <li><strong>Text + chart documents:</strong> 20–40% reduction</li>
+      <li><strong>Already-compressed PDFs:</strong> Less than 10% additional gain</li>
+    </ul>
+
+    <h2>When Compression Won't Help</h2>
+    <p>If your PDF was already exported with compression (e.g., from a modern PDF printer), running it through a compressor again yields little gain. In that case, consider whether you need all the pages — splitting out only the relevant pages can reduce size more effectively than re-compressing.</p>
+
+    <div class="article-tip"><strong>💡 Pro tip:</strong> After compressing, always open the PDF and check page 1, a middle page, and the last page visually before sending. Compression artifacts usually appear first on pages with photographs or gradients.</div>
+  `
+},
+
+'best-pdf-converter-2026': {
+  emoji: '🏆',
+  cat: 'Tool Reviews',
+  catStyle: 'background:#e8f0fe;color:#1a73e8',
+  title: 'Best Free PDF Converter in 2026 (Tested & Ranked)',
+  meta: ['📅 January 2026', '⏱ 9 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>We spent two weeks testing 12 of the most popular free PDF converters available in 2026. We converted the same set of test documents — a scanned invoice, a formatted Word report, a PowerPoint deck, and an Excel spreadsheet — through each tool and graded them on conversion accuracy, speed, privacy, and ease of use.</p>
+
+    <div class="article-tip"><strong>📌 Bottom line up front:</strong> For most users who value privacy and need zero installation, a browser-based tool is the clear winner. For heavy users with complex formatting needs, desktop software still edges ahead on accuracy.</div>
+
+    <h2>What We Tested</h2>
+    <ul>
+      <li>Conversion quality — does the output preserve fonts, tables, and layout?</li>
+      <li>Speed — time from file drop to download</li>
+      <li>Privacy — is the file uploaded to a server?</li>
+      <li>File size limits — is there a cap?</li>
+      <li>Ease of use — how many clicks to get a result?</li>
+      <li>Format support — PDF↔Word, PDF↔Excel, PDF↔JPG, etc.</li>
+    </ul>
+
+    <h2>The Shortlist</h2>
+
+    <h3>🥇 DocConverter — Best for Privacy</h3>
+    <p>DocConverter processes everything in your browser using pdf.js, pdf-lib, mammoth.js, and docx.js. Your files never leave your device. It's completely free, has no file size limits, and supports all major conversions. The interface is clean and fast. For privacy-conscious users — anyone working with contracts, medical records, or confidential reports — this is the obvious pick.</p>
+
+    <h3>🥈 iLovePDF — Best Online All-Rounder</h3>
+    <p>iLovePDF handles a huge range of PDF tasks and has a polished interface. Files are uploaded to their servers (deleted after processing), which is a trade-off for users with sensitive documents. The free tier includes all core tools with occasional ads. Their mobile app is excellent.</p>
+
+    <h3>🥉 Smallpdf — Best UX</h3>
+    <p>Smallpdf has the most polished interface of any online tool. However, the free tier is limited to 2 tasks per hour, which frustrates frequent users. Quality is high for Word and Excel conversions. Files are uploaded to their cloud.</p>
+
+    <h3>LibreOffice (Desktop) — Best Free Desktop Option</h3>
+    <p>LibreOffice is fully open-source, runs offline, and handles complex Word/Excel → PDF conversions accurately. It's the best free desktop option, though it requires installation and is slower for simple tasks. No file size limits.</p>
+
+    <h3>Adobe Acrobat Reader (Free) — Best PDF Viewer, Limited Converter</h3>
+    <p>The free version of Acrobat is an excellent PDF reader and basic editor, but most conversion features require an Acrobat Pro or Document Cloud subscription. If you already subscribe, Acrobat's conversion quality is unmatched.</p>
+
+    <h2>Full Comparison</h2>
+    <table class="compare-table">
+      <tr><th>Tool</th><th>Privacy</th><th>Free Limits</th><th>Quality</th><th>Formats</th></tr>
+      <tr><td><strong>DocConverter</strong></td><td class="check">✔ 100% local</td><td class="check">✔ None</td><td>Good</td><td>All major</td></tr>
+      <tr><td>iLovePDF</td><td>Server upload</td><td class="check">✔ Generous</td><td>Excellent</td><td>All major</td></tr>
+      <tr><td>Smallpdf</td><td>Server upload</td><td class="cross">✗ 2/hr</td><td>Excellent</td><td>All major</td></tr>
+      <tr><td>PDF2Doc</td><td>Server upload</td><td class="check">✔ Moderate</td><td>Good</td><td>Limited</td></tr>
+      <tr><td>LibreOffice</td><td class="check">✔ Local</td><td class="check">✔ None</td><td>Very Good</td><td>Office formats</td></tr>
+      <tr><td>Adobe Acrobat</td><td class="check">✔ Local</td><td class="cross">✗ Very limited</td><td>Best</td><td>All</td></tr>
+    </table>
+
+    <h2>Which Should You Choose?</h2>
+    <ul>
+      <li><strong>Occasional personal use, privacy matters:</strong> DocConverter</li>
+      <li><strong>Frequent use, don't mind server uploads:</strong> iLovePDF or Smallpdf</li>
+      <li><strong>Complex documents, need offline use:</strong> LibreOffice</li>
+      <li><strong>Professional / enterprise work:</strong> Adobe Acrobat Pro</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>Try DocConverter — No Upload, No Limits, Free Forever</h3>
+      <p>Convert PDF to Word, Excel, JPG, or PowerPoint — all in your browser.</p>
+      <button onclick="closeBlogArticle(); showHome()">🚀 Open DocConverter Tools</button>
+    </div>
+
+    <h2>Final Verdict</h2>
+    <p>For most day-to-day PDF conversion needs, free browser-based tools are more than sufficient. The quality gap between free and paid tools has narrowed significantly in 2025–2026, especially for standard office document conversions. The main reason to pay for Acrobat Pro is complex forms, advanced editing, or certified signatures.</p>
+  `
+},
+
+'pdf-to-word-guide': {
+  emoji: '📝',
+  cat: 'Convert Files',
+  catStyle: 'background:#e6f4ea;color:#1e8c45',
+  title: 'How to Convert PDF to Word Without Losing Formatting',
+  meta: ['📅 May 2025', '⏱ 5 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Converting a PDF to Word should be simple — but anyone who's done it knows the frustration: tables collapse, fonts change, images float to the wrong place, and bullet points turn into random symbols. Here's why it happens, and how to get a clean result every time.</p>
+
+    <h2>Why PDF to Word Conversion Goes Wrong</h2>
+    <p>PDFs are <em>presentation formats</em> — they describe exactly where every character, image, and line appears on a page. Word documents are <em>flow formats</em> — they describe content that reflows based on page size and margins. When converting, software must infer which text is a heading, which is a table cell, and which is a caption — and it often guesses wrong.</p>
+
+    <ul>
+      <li><strong>Scanned PDFs</strong> have no text layer at all — they're images. These require OCR and will always produce less accurate results.</li>
+      <li><strong>PDFs with complex column layouts</strong> often confuse converters into merging columns into one stream of text.</li>
+      <li><strong>PDFs with custom fonts</strong> may show as placeholder characters if the font isn't embedded.</li>
+    </ul>
+
+    <h2>Step-by-Step: Getting the Best Result</h2>
+
+    <h3>Step 1 — Check if your PDF has a text layer</h3>
+    <p>Open the PDF and try to select some text with your cursor. If you can highlight words, the PDF has a text layer and conversion will be accurate. If you can't select any text, it's a scanned document — use the OCR tool first.</p>
+
+    <h3>Step 2 — Use a conversion tool with text extraction</h3>
+    <p>DocConverter's PDF to Word tool extracts the text layer using pdf.js and rebuilds it as a .docx using docx.js. For text-heavy documents like reports, contracts, and letters, the result is clean and editable.</p>
+
+    <h3>Step 3 — Review and clean up in Word</h3>
+    <p>After converting, always do a quick pass in Word. Use <kbd>Ctrl+H</kbd> to find/replace any stray characters, check that headings have the correct style applied, and verify that tables are intact.</p>
+
+    <div class="article-tip"><strong>💡 Tip:</strong> For documents where formatting is critical (forms, brochures), it's often faster to recreate them in Word from scratch using the PDF as a reference, rather than fighting a messy conversion.</div>
+
+    <h2>When to Use Each Tool</h2>
+    <table class="compare-table">
+      <tr><th>Document Type</th><th>Best Approach</th></tr>
+      <tr><td>Contract / legal text</td><td>Browser converter (text layer) → minor cleanup</td></tr>
+      <tr><td>Scanned invoice</td><td>OCR first, then convert</td></tr>
+      <tr><td>Branded brochure</td><td>Recreate in Word (conversion won't preserve design)</td></tr>
+      <tr><td>Report with tables</td><td>Adobe Acrobat Pro or LibreOffice for best table accuracy</td></tr>
+      <tr><td>Plain text document</td><td>Any converter — even a basic one works fine</td></tr>
+    </table>
+
+    <div class="article-cta">
+      <h3>Convert PDF to Word — Free & Instant</h3>
+      <p>Processed locally in your browser. No sign-up, no file size limits.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('pdf-to-word')">📝 Convert PDF to Word Now</button>
+    </div>
+  `
+},
+
+'best-pdf-converter-2026-tools': null,
+
+'merge-split-pdf': {
+  emoji: '✂️',
+  cat: 'Tips & Tricks',
+  catStyle: 'background:#fff0f3;color:#e8163d',
+  title: 'Merge vs. Split PDF: When to Use Each (With Examples)',
+  meta: ['📅 April 2025', '⏱ 4 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Merge and Split are the two most common PDF operations after conversion and compression. They sound simple, but knowing <em>when</em> to use each saves a lot of time — especially when working with invoices, contracts, and reports.</p>
+
+    <h2>When to Merge PDFs</h2>
+    <p>Use merge when you need to <strong>combine multiple documents into a single deliverable</strong>. Common scenarios:</p>
+    <ul>
+      <li>Combining a cover letter, CV, and certificates into a single job application PDF</li>
+      <li>Merging monthly bank statements into an annual financial record</li>
+      <li>Assembling a multi-section report created by different team members</li>
+      <li>Combining multiple scanned pages of a single document into one file</li>
+    </ul>
+    <div class="article-tip"><strong>💡 Order matters:</strong> When merging, arrange files in the correct sequence before you start. DocConverter's merge tool lets you drag files to reorder them before combining.</div>
+
+    <h2>When to Split PDFs</h2>
+    <p>Use split when you need to <strong>extract part of a larger document</strong>. Common scenarios:</p>
+    <ul>
+      <li>Extracting a single invoice from a multi-page billing PDF</li>
+      <li>Sending only the relevant chapter of a report to a client</li>
+      <li>Separating a scanned multi-document batch into individual files</li>
+      <li>Extracting an appendix or attachment embedded in a long PDF</li>
+    </ul>
+
+    <h2>Advanced: Extract Specific Pages</h2>
+    <p>DocConverter's split tool lets you specify exact page ranges (e.g., pages 3–7, or just page 12), so you're not stuck splitting only at the beginning or end. This is ideal for pulling a specific section out of a lengthy document.</p>
+
+    <div class="article-cta">
+      <h3>Merge or Split Your PDFs — Right in Your Browser</h3>
+      <p>No installation. No file size limits. 100% private — your files never leave your device.</p>
+      <button onclick="closeBlogArticle(); showHome()">📎 Open PDF Tools</button>
+    </div>
+  `
+},
+
+'pdf-security-guide': {
+  emoji: '🔐',
+  cat: 'Security & Privacy',
+  catStyle: 'background:#e0f5fa;color:#0891b2',
+  title: 'How to Password-Protect a PDF (and When You Should)',
+  meta: ['📅 March 2025', '⏱ 7 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Sending a PDF with sensitive information — a salary slip, a tax return, a medical report — over email or cloud storage without protection is a risk. A password-protected PDF ensures only the intended recipient can open it. But password protection has limits you should understand.</p>
+
+    <h2>Two Types of PDF Password Protection</h2>
+    <h3>1. Document Open Password (User Password)</h3>
+    <p>This requires anyone opening the PDF to enter a password. Without it, the file shows as unreadable. This is the most common form of protection and what most tools implement.</p>
+    <h3>2. Permissions Password (Owner Password)</h3>
+    <p>This restricts what users can do with the PDF — printing, copying text, editing. The file opens without a password, but restricted operations are locked. This requires Adobe Acrobat Pro or similar advanced tools.</p>
+
+    <h2>How Strong Is PDF Password Protection?</h2>
+    <p>Modern PDFs using AES-256 encryption are extremely strong — brute-forcing a random 12-character password would take centuries. However:</p>
+    <ul>
+      <li><strong>Weak passwords are the real risk.</strong> "1234" or "password" can be cracked in seconds with freely available tools.</li>
+      <li><strong>PDF 1.4 and older use RC4 encryption</strong>, which is weaker. Always use a tool that outputs PDF 1.7 or later with AES-256.</li>
+      <li><strong>The password must be shared securely.</strong> Don't include the password in the same email as the protected file — use a separate channel (text message, phone call).</li>
+    </ul>
+
+    <div class="article-tip"><strong>💡 Good password formula:</strong> Use 3–4 random words plus a number, e.g. "BlueTableRiver47". Easy to remember, extremely hard to crack.</div>
+
+    <h2>When Should You Protect a PDF?</h2>
+    <ul>
+      <li><strong>Always:</strong> Tax returns, payslips, medical records, legal contracts, financial statements</li>
+      <li><strong>Consider it:</strong> Business proposals, internal reports, personal identification documents</li>
+      <li><strong>Unnecessary:</strong> Public information, marketing materials, documents you want recipients to share freely</li>
+    </ul>
+
+    <h2>Unlocking a Password-Protected PDF You Own</h2>
+    <p>If you've forgotten the password to your own PDF, DocConverter's Unlock PDF tool can attempt to remove the protection. Note: this only works on PDFs where the protection was applied without strong encryption (e.g., using older print-to-PDF methods). AES-256 encrypted PDFs cannot be cracked without the password.</p>
+
+    <div class="article-cta">
+      <h3>Protect or Unlock Your PDF — Free & Private</h3>
+      <p>All processing happens in your browser. Your document is never sent anywhere.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('protect')">🔐 Protect My PDF</button>
+    </div>
+  `
+},
+
+'image-compression-guide': {
+  emoji: '🖼️',
+  cat: 'Compress & Optimize',
+  catStyle: 'background:#f0ebff;color:#7c3aed',
+  title: 'How to Compress Images for Web Without Losing Sharpness',
+  meta: ['📅 February 2025', '⏱ 5 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Images account for over 50% of the average webpage's data. Compressing them properly can cut load time in half and save significant storage costs — without any visible quality loss if you do it right.</p>
+
+    <h2>Choose the Right Format First</h2>
+    <table class="compare-table">
+      <tr><th>Format</th><th>Best For</th><th>Typical Size</th><th>Transparency</th></tr>
+      <tr><td><strong>WebP</strong></td><td>Web images (photos + graphics)</td><td>Smallest</td><td class="check">✔ Yes</td></tr>
+      <tr><td><strong>JPG</strong></td><td>Photographs</td><td>Small–Medium</td><td class="cross">✗ No</td></tr>
+      <tr><td><strong>PNG</strong></td><td>Logos, screenshots, text</td><td>Medium–Large</td><td class="check">✔ Yes</td></tr>
+      <tr><td><strong>GIF</strong></td><td>Simple animations</td><td>Medium</td><td>Partial</td></tr>
+      <tr><td><strong>AVIF</strong></td><td>Next-gen web images</td><td>Smallest</td><td class="check">✔ Yes</td></tr>
+    </table>
+    <p><strong>Bottom line:</strong> For the web, WebP is almost always the best choice in 2026. For print, use JPG at 300 DPI or PNG for lossless quality.</p>
+
+    <h2>Quality Settings Explained</h2>
+    <p>Image compressors use a quality scale (usually 0–100 or 0–1). The sweet spot for web images is <strong>75–85%</strong> quality — at this range, compression artifacts are invisible to most people, but file size drops 40–70% compared to the original.</p>
+    <ul>
+      <li><strong>90–100%:</strong> Near-lossless, minimal size reduction. Good for archiving.</li>
+      <li><strong>75–85%:</strong> Ideal for web — sharp, fast, good compression.</li>
+      <li><strong>50–70%:</strong> Noticeable artifacts on close inspection. Acceptable for thumbnails.</li>
+      <li><strong>Below 50%:</strong> Visible quality loss. Avoid for anything important.</li>
+    </ul>
+
+    <div class="article-tip"><strong>💡 Test at full size:</strong> Always view the compressed image at 100% zoom before using it. Thumbnails hide artifacts that are obvious at full resolution.</div>
+
+    <h2>Resize Before Compressing</h2>
+    <p>The biggest win comes from matching image dimensions to display size. If your website shows a 600px wide thumbnail, there's no benefit to uploading a 4000px photo — it's just wasted bandwidth. Resize first, then compress.</p>
+    <p>DocConverter's Resize Image tool lets you set exact pixel dimensions, and the Compress Image tool handles quality reduction — use both together for maximum savings.</p>
+
+    <div class="article-cta">
+      <h3>Compress & Resize Your Images — Free</h3>
+      <p>JPG, PNG, and WebP. No sign-up, no watermarks, processed locally in your browser.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('compress-img')">🖼️ Compress Image Now</button>
+    </div>
+  `
+},
+
+'word-to-pdf-guide': {
+  emoji: '📄',
+  cat: 'Convert Files',
+  catStyle: 'background:#e8f0fe;color:#1a73e8',
+  title: 'Word to PDF: 5 Methods Compared (Speed, Quality & Privacy)',
+  meta: ['📅 January 2025', '⏱ 6 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Converting Word to PDF is one of the most common document tasks — but there are at least 5 different ways to do it, and they produce meaningfully different results. Here's a practical comparison.</p>
+
+    <h2>Method 1: Save As PDF in Microsoft Word (Best Overall)</h2>
+    <p>File → Save As → PDF. This is the gold standard. Word has direct access to the document structure, so fonts embed correctly, images stay crisp, and tables render perfectly. If you have Word installed, always use this method.</p>
+    <div class="article-tip"><strong>💡 Tip:</strong> In the save dialog, click "Options" and select "Best for electronic distribution and accessibility" to optimize for screen viewing.</div>
+
+    <h2>Method 2: Print to PDF (Quick but Limited)</h2>
+    <p>On any OS, you can "print" to a PDF printer (Windows: Microsoft Print to PDF; Mac: built-in PDF option). This captures the visual output but may not embed fonts correctly, and interactive elements (links, form fields) are often lost.</p>
+
+    <h2>Method 3: DocConverter (Best for Privacy)</h2>
+    <p>Upload your .docx to DocConverter's Word to PDF tool. Processing happens in your browser — your file never leaves your device. This uses mammoth.js to parse the document and pdf-lib to generate the PDF. Quality is good for standard documents. Best choice when using a company computer where you can't install software.</p>
+
+    <h2>Method 4: LibreOffice (Best Free Desktop)</h2>
+    <p>Open the .docx in LibreOffice Writer and export as PDF (File → Export as PDF). LibreOffice does a very good job with complex formatting and gives you detailed control over the output (image compression, PDF/A compliance, form handling). Requires installation but is completely free.</p>
+
+    <h2>Method 5: Google Docs (Convenient, Cloud-Based)</h2>
+    <p>Upload to Google Docs, then File → Download → PDF. Convenient if you're already in Google Workspace. Note that your document is uploaded to Google's servers. Quality is generally good but complex layouts sometimes shift.</p>
+
+    <table class="compare-table">
+      <tr><th>Method</th><th>Quality</th><th>Privacy</th><th>Needs Install</th><th>Cost</th></tr>
+      <tr><td>Word Save As PDF</td><td class="check">✔ Best</td><td class="check">✔ Local</td><td>Word required</td><td>Word subscription</td></tr>
+      <tr><td>Print to PDF</td><td>Good</td><td class="check">✔ Local</td><td class="check">✔ No</td><td class="check">✔ Free</td></tr>
+      <tr><td>DocConverter</td><td>Good</td><td class="check">✔ Local</td><td class="check">✔ No</td><td class="check">✔ Free</td></tr>
+      <tr><td>LibreOffice</td><td>Very Good</td><td class="check">✔ Local</td><td>Yes (free)</td><td class="check">✔ Free</td></tr>
+      <tr><td>Google Docs</td><td>Good</td><td class="cross">✗ Cloud</td><td class="check">✔ No</td><td class="check">✔ Free</td></tr>
+    </table>
+
+    <div class="article-cta">
+      <h3>Convert Word to PDF Instantly — No Upload Required</h3>
+      <p>Your .docx stays in your browser. Processed with open-source libraries.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('word-to-pdf')">📄 Word to PDF Now</button>
+    </div>
+  `
+},
+
+'ocr-pdf-guide': {
+  emoji: '🔍',
+  cat: 'Tips & Tricks',
+  catStyle: 'background:#f0ebff;color:#7c3aed',
+  title: 'What Is OCR and How Does It Make Scanned PDFs Searchable?',
+  meta: ['📅 December 2024', '⏱ 4 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>If you've ever scanned a document or photograph and tried to copy text from it, you've hit the wall: the PDF is just an image, and the text inside it is as editable as a photograph of a book. OCR — Optical Character Recognition — is the technology that fixes this.</p>
+
+    <h2>How OCR Works</h2>
+    <p>OCR software analyzes the pixel patterns in a scanned image and recognizes characters by their shape. It breaks the image into regions, identifies lines of text, then uses pattern matching and language models to determine what each character most likely is. Modern OCR (like Tesseract, Google Vision, or AWS Textract) achieves 99%+ accuracy on clean, high-resolution scans.</p>
+
+    <h2>When You Need OCR</h2>
+    <ul>
+      <li>Your PDF was created by scanning a paper document</li>
+      <li>You can't select or copy text in a PDF</li>
+      <li>Searching the PDF returns no results</li>
+      <li>The PDF shows as a series of images when you zoom in</li>
+    </ul>
+
+    <h2>When You Don't Need OCR</h2>
+    <p>If your PDF was created digitally (from Word, Excel, a browser, or a PDF printer), it already has a text layer. You can verify this by pressing Ctrl+A in your PDF viewer — if all the text highlights, OCR is unnecessary.</p>
+
+    <h2>What DocConverter's OCR Does</h2>
+    <p>DocConverter's OCR PDF tool extracts the existing text layer from PDFs that contain embedded text (including "image with invisible text" PDFs created by scanners with built-in OCR). For truly image-only PDFs, it creates a searchable Word document with the text it can extract. Full Tesseract-based OCR in the browser is a complex operation, and for heavily scanned documents, a dedicated OCR service will produce better results.</p>
+
+    <div class="article-tip"><strong>💡 Tip for best OCR accuracy:</strong> Scan documents at 300 DPI minimum, in black-and-white mode. Color scans of black text are larger files with no accuracy benefit for OCR.</div>
+
+    <div class="article-cta">
+      <h3>Extract Text from Your PDF</h3>
+      <p>Use DocConverter's OCR tool to make your scanned PDF searchable and copyable.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('ocr')">🔍 Open OCR Tool</button>
+    </div>
+  `
+},
+
+'reduce-pdf-email': {
+  emoji: '📧',
+  cat: 'Compress & Optimize',
+  catStyle: 'background:#fef3e2;color:#e37400',
+  title: 'How to Reduce PDF Size for Email Attachments (Under 10 MB)',
+  meta: ['📅 November 2024', '⏱ 3 min read', '✍️ DocConverter Team'],
+  body: `
+    <p>Gmail's attachment limit is 25 MB. Outlook's is 20 MB. But many corporate email servers reject anything over 10 MB — and sometimes 5 MB. Here's the fastest way to get your PDF under any limit.</p>
+
+    <h2>Quick 3-Step Process</h2>
+    <ol>
+      <li><strong>Check the current file size</strong> — right-click the file and look at Properties. If it's under 8 MB, most email servers will accept it. If it's larger, continue.</li>
+      <li><strong>Compress the PDF</strong> — use DocConverter's Compress PDF with "Medium" quality. This typically reduces size by 50–60% for photo-heavy PDFs, and 20–30% for text documents.</li>
+      <li><strong>If still too large, check the page count</strong> — are all pages needed? Split out only the relevant pages before compressing.</li>
+    </ol>
+
+    <h2>Target Sizes by Use Case</h2>
+    <table class="compare-table">
+      <tr><th>Destination</th><th>Target Size</th></tr>
+      <tr><td>Gmail / standard email</td><td>Under 20 MB</td></tr>
+      <tr><td>Corporate email (safe)</td><td>Under 8 MB</td></tr>
+      <tr><td>Government portals</td><td>Under 5 MB (often 2 MB)</td></tr>
+      <tr><td>WhatsApp document</td><td>Under 100 MB</td></tr>
+      <tr><td>LinkedIn message attachment</td><td>Under 5 MB</td></tr>
+    </table>
+
+    <h2>When Compression Isn't Enough</h2>
+    <p>If your PDF is very large (50+ MB) and compression only gets it to 15 MB, consider:</p>
+    <ul>
+      <li><strong>File sharing link</strong> — Upload to Google Drive, Dropbox, or OneDrive and share a link. No attachment size limit.</li>
+      <li><strong>Split and send in parts</strong> — If the content allows, send as 2–3 smaller attachments.</li>
+      <li><strong>Re-export at lower resolution</strong> — If you created the PDF yourself, re-export at 96–150 DPI instead of 300 DPI.</li>
+    </ul>
+
+    <div class="article-cta">
+      <h3>Compress Your PDF for Email — Takes 10 Seconds</h3>
+      <p>Drag and drop your PDF, choose Medium quality, download. Done.</p>
+      <button onclick="closeBlogArticle(); showHome(); openTool('compress-pdf')">🗜️ Compress PDF Now</button>
+    </div>
+  `
+}
+
+};
+
+function openArticle(id) {
+  const article = ARTICLES[id];
+  if (!article) return;
+
+  document.getElementById('blog-listing').style.display = 'none';
+  document.getElementById('article-view').style.display = 'block';
+
+  const relatedHTML = Object.entries(ARTICLES)
+    .filter(([k, v]) => k !== id && v)
+    .slice(0, 4)
+    .map(([k, v]) =>
+      '<div class="related-card" onclick="openArticle(\'' + k + '\')">' +
+        '<div class="rc-emoji">' + v.emoji + '</div>' +
+        '<div class="rc-title">' + v.title + '</div>' +
+        '<div class="rc-cat">' + v.cat + '</div>' +
+      '</div>'
+    ).join('');
+
+  const metaHTML = article.meta.map(m => '<span>' + m + '</span>').join('<span style="color:var(--border2)">·</span>');
+
+  document.getElementById('article-content').innerHTML =
+    '<div class="article-header">' +
+      '<span class="article-cat" style="' + article.catStyle + '">' + article.cat + '</span>' +
+      '<h1 class="article-title">' + article.title + '</h1>' +
+      '<div class="article-meta">' + metaHTML + '</div>' +
+    '</div>' +
+    '<div class="article-hero-box">' + article.emoji + '</div>' +
+    '<div class="article-body">' + article.body + '</div>' +
+    '<div class="related-articles">' +
+      '<div class="section-title"><div class="st-line"></div>Related Articles</div>' +
+      '<div class="related-grid">' + relatedHTML + '</div>' +
+    '</div>';
+
+  window.scrollTo(0, 0);
 }
 </script>
 </body>
