@@ -27,6 +27,22 @@
 <!-- Canonical -->
 <link rel="canonical" href="https://docconverter.app">
 
+<!-- ✅ Google Search Console Verification -->
+<!-- REPLACE the content value below with your actual verification code from Google Search Console -->
+<!-- Go to: search.google.com/search-console → Add Property → "URL prefix" → HTML tag method -->
+<meta name="google-site-verification" content="REPLACE_WITH_YOUR_GOOGLE_SEARCH_CONSOLE_CODE">
+
+<!-- ✅ Google Analytics 4 (GA4) -->
+<!-- REPLACE G-XXXXXXXXXX with your actual Measurement ID from Google Analytics -->
+<!-- Go to: analytics.google.com → Admin → Data Streams → Web → Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
 <!-- Schema.org JSON-LD -->
 <script type="application/ld+json">
 {
@@ -462,23 +478,13 @@ nav {
 .dz-btn:hover { background: var(--red-dark); }
 
 /* ─── FILE PREVIEW ─── */
-.file-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 16px;
-}
-.file-row-icon { font-size: 28px; flex-shrink: 0; }
+.file-row-icon { font-size: 22px; flex-shrink: 0; }
 .file-row-info { flex: 1; min-width: 0; }
 .file-row-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .file-row-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
 .file-row-rm {
   background: none; border: none; cursor: pointer; color: var(--text3);
-  font-size: 18px; padding: 4px; border-radius: 6px;
+  font-size: 16px; padding: 4px; border-radius: 6px; flex-shrink: 0;
 }
 .file-row-rm:hover { color: var(--red); background: var(--red-bg); }
 
@@ -686,6 +692,62 @@ footer {
   color: var(--text3);
   flex-wrap: wrap;
   gap: 10px;
+}
+
+/* ─── DRAG-REORDER FILE LIST ─── */
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 7px;
+  transition: background 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.file-row.dragging {
+  opacity: 0.45;
+  box-shadow: none;
+}
+.file-row.drag-over-top {
+  border-top: 2px solid var(--red);
+}
+.file-row.drag-over-bottom {
+  border-bottom: 2px solid var(--red);
+}
+.drag-handle {
+  cursor: grab;
+  color: var(--text3);
+  font-size: 15px;
+  padding: 2px 4px;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+}
+.drag-handle:active { cursor: grabbing; }
+.drag-hint {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.file-order-badge {
+  background: var(--red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* ─── Spinner ─── */
@@ -1903,12 +1965,20 @@ function renderModal(state) {
     // File list for merge
     let fileList = '';
     if (tool.multi && currentFiles.length > 0) {
-      fileList = currentFiles.map((f,i)=>`
-        <div class="file-row">
+      fileList = `<div class="drag-hint">☰ Drag to reorder · Files will be merged in this order</div>`;
+      fileList += `<div id="sortable-file-list">` + currentFiles.map((f,i)=>`
+        <div class="file-row" draggable="true" data-idx="${i}"
+          ondragstart="fileDragStart(event,${i})"
+          ondragover="fileDragOver(event,${i})"
+          ondragleave="fileDragLeave(event)"
+          ondrop="fileDrop(event,${i})"
+          ondragend="fileDragEnd(event)">
+          <div class="drag-handle" title="Drag to reorder">⠿</div>
+          <div class="file-order-badge">${i+1}</div>
           <span class="file-row-icon">📄</span>
           <div class="file-row-info"><div class="file-row-name">${f.name}</div><div class="file-row-meta">${formatSize(f.size)}</div></div>
           <button class="file-row-rm" onclick="currentFiles.splice(${i},1);renderModal('ready')">✕</button>
-        </div>`).join('');
+        </div>`).join('') + `</div>`;
       fileList += `<button onclick="triggerFileInput()" style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;margin-bottom:12px;font-weight:600">+ Add more PDFs</button>`;
     }
 
@@ -2349,6 +2419,46 @@ async function compressImage() {
   resultBlob=compressed;
   resultName=currentFile.name.replace(/\.[^.]+$/,'')+'_compressed.'+currentFile.name.split('.').pop();
   renderModal('done');
+}
+
+// ─── DRAG-TO-REORDER (Merge PDF) ─────────────────────────────────────────────
+let dragSrcIdx = null;
+
+function fileDragStart(e, idx) {
+  dragSrcIdx = idx;
+  e.dataTransfer.effectAllowed = 'move';
+  e.currentTarget.classList.add('dragging');
+}
+
+function fileDragOver(e, idx) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const rows = document.querySelectorAll('#sortable-file-list .file-row');
+  rows.forEach(r => r.classList.remove('drag-over-top','drag-over-bottom'));
+  if (idx !== dragSrcIdx) {
+    const cls = idx < dragSrcIdx ? 'drag-over-top' : 'drag-over-bottom';
+    e.currentTarget.classList.add(cls);
+  }
+}
+
+function fileDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over-top','drag-over-bottom');
+}
+
+function fileDrop(e, dropIdx) {
+  e.preventDefault();
+  if (dragSrcIdx === null || dragSrcIdx === dropIdx) return;
+  const moved = currentFiles.splice(dragSrcIdx, 1)[0];
+  currentFiles.splice(dropIdx, 0, moved);
+  dragSrcIdx = null;
+  renderModal('ready');
+}
+
+function fileDragEnd(e) {
+  dragSrcIdx = null;
+  document.querySelectorAll('#sortable-file-list .file-row').forEach(r => {
+    r.classList.remove('dragging','drag-over-top','drag-over-bottom');
+  });
 }
 
 // ─── Merge PDFs ───────────────────────────────────────────────────────────────
