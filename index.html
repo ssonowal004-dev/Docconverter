@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMLL9516C5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YMLL9516C5');
-</script>
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="ENFBc4lFujhArCGZ2DxLo1Sa-TFxwjLNDBf-RPp0DPE" />
 <!-- Sitemap -->
@@ -842,305 +833,365 @@ footer {
 #blog-section { display: none; }
 #tools-section { display: block; }
 
-.blog-hero {
-  background: linear-gradient(135deg, #fff0f3 0%, #e8f0fe 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 40px 24px 36px;
-  text-align: center;
+/* ── NEWS TITLE BAR ── */
+.news-titlebar {
+  border-bottom: 2px solid var(--text);
+  padding: 28px 0 14px;
+  margin: 0;
 }
-.blog-hero h2 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(22px, 3.5vw, 32px);
+.news-titlebar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.news-titlebar-left {}
+.news-titlebar-eyebrow {
+  font-size: 10px;
   font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.news-titlebar-left h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 900;
   color: var(--text);
   letter-spacing: -0.5px;
-  margin-bottom: 10px;
+  margin: 0;
+  line-height: 1;
 }
-.blog-hero p { font-size: 15px; color: var(--text2); max-width: 520px; margin: 0 auto; }
-.blog-hero .highlight { color: var(--red); }
-
-/* Blog category pills */
-.blog-filter {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 28px 0 32px;
-}
-.blog-pill {
-  padding: 7px 16px;
-  border-radius: 99px;
-  border: 1px solid var(--border2);
-  background: var(--white);
-  color: var(--text2);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.15s;
-}
-.blog-pill:hover { border-color: var(--red); color: var(--red); background: var(--red-bg); }
-.blog-pill.active { border-color: var(--red); background: var(--red); color: #fff; }
-
-/* Blog grid (card listing) */
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 48px;
-}
-
-.blog-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: all 0.18s;
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-}
-.blog-card:hover {
-  border-color: var(--red);
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-3px);
-}
-.blog-card-thumb {
-  height: 130px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  position: relative;
-  overflow: hidden;
-}
-.blog-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-.blog-card-cat {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 99px;
-  margin-bottom: 10px;
-  width: fit-content;
-}
-.blog-card-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.4;
-  margin-bottom: 8px;
-}
-.blog-card-excerpt {
-  font-size: 12px;
-  color: var(--text3);
-  line-height: 1.6;
-  flex: 1;
-}
-.blog-card-meta {
-  margin-top: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.news-titlebar-meta {
   font-size: 11px;
   color: var(--text3);
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
+  margin-top: 8px;
 }
-.blog-card-meta .dot { color: var(--border2); }
+.news-titlebar-meta span { margin-right: 16px; }
 
-/* ─── ARTICLE VIEW ─── */
-#article-view {
-  display: none;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 0 80px;
+/* Category tabs strip */
+.news-cats-strip {
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  position: sticky;
+  top: 57px;
+  z-index: 90;
 }
-.article-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
+.news-cats-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.news-cats-inner::-webkit-scrollbar { display: none; }
+.news-cat-tab {
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text2);
-  cursor: pointer;
-  padding: 8px 0;
-  margin-bottom: 24px;
   border: none;
   background: none;
-  font-family: 'DM Sans', sans-serif;
-  transition: color 0.15s;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
 }
-.article-back:hover { color: var(--red); }
+.news-cat-tab:hover { color: var(--text); }
+.news-cat-tab.active { color: var(--red); border-bottom-color: var(--red); }
 
-.article-header { margin-bottom: 32px; }
-.article-cat {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 99px;
-  margin-bottom: 14px;
+/* ── NEWS BODY ── */
+.news-body {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 32px 32px 64px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: start;
 }
-.article-title {
+
+/* ── MAIN COLUMN ── */
+.news-main {}
+
+/* Hero story (big card) */
+.news-hero-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.news-hero-story:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.1); }
+.nhs-thumb {
+  min-height: 240px;
+  background: linear-gradient(135deg, #1a0a2e 0%, #7c3aed 60%, #e8163d 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.nhs-thumb-icon { opacity: 0.55; }
+.nhs-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: #fbbf24; color: #78350f;
+  font-size: 9px; font-weight: 800;
+  padding: 3px 8px; border-radius: 3px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.nhs-body {
+  padding: 24px 24px;
+  background: var(--white);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.nhs-cat {
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--red);
+  margin-bottom: 10px;
+}
+.nhs-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(22px, 4vw, 34px);
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.25;
-  letter-spacing: -0.5px;
-  margin-bottom: 14px;
+  font-size: 19px; font-weight: 900;
+  color: var(--text); line-height: 1.3;
+  margin: 0 0 12px;
 }
-.article-meta {
+.nhs-excerpt {
+  font-size: 13px; color: var(--text2); line-height: 1.7;
+  margin: 0 0 20px;
+}
+.nhs-byline {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--text3);
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.nhs-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--red); color: #fff;
+  font-size: 8px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nhs-author { font-weight: 600; color: var(--text2); }
+.nhs-dot { color: var(--border2); }
+
+/* Section heading inside main */
+.news-section-head {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 12px;
-  color: var(--text3);
-  flex-wrap: wrap;
-}
-.article-meta span { display: flex; align-items: center; gap: 4px; }
-
-.article-hero-box {
-  background: var(--bg);
-  border-radius: var(--radius);
-  padding: 32px;
-  text-align: center;
-  font-size: 80px;
-  margin-bottom: 32px;
-  border: 1px solid var(--border);
-}
-
-/* Article prose */
-.article-body { line-height: 1.8; color: var(--text2); }
-.article-body h2 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-  margin: 36px 0 12px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--red-bg2);
-}
-.article-body h3 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  margin: 24px 0 8px;
-}
-.article-body p { margin-bottom: 16px; font-size: 14.5px; }
-.article-body ul, .article-body ol {
-  padding-left: 24px;
+  gap: 12px;
   margin-bottom: 16px;
 }
-.article-body li { margin-bottom: 8px; font-size: 14.5px; }
-.article-body strong { color: var(--text); font-weight: 700; }
+.news-section-head-line {
+  flex: 1; height: 1px; background: var(--border);
+}
+.news-section-head-label {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text3); white-space: nowrap;
+}
+.news-section-head-line-left { width: 20px; flex: none; background: var(--red); height: 2px; }
 
-.article-tip {
-  background: var(--blue-bg);
-  border-left: 4px solid var(--blue);
-  border-radius: 0 10px 10px 0;
-  padding: 14px 18px;
-  margin: 20px 0;
-  font-size: 13.5px;
-  color: #1a3060;
-}
-.article-tip strong { color: var(--blue); }
-
-.article-warn {
-  background: var(--orange-bg);
-  border-left: 4px solid var(--orange);
-  border-radius: 0 10px 10px 0;
-  padding: 14px 18px;
-  margin: 20px 0;
-  font-size: 13.5px;
-  color: #5a3200;
-}
-
-.article-cta {
-  background: linear-gradient(135deg, var(--red-bg) 0%, #f5e8ff 100%);
-  border: 1px solid var(--red-bg2);
-  border-radius: var(--radius);
-  padding: 28px 28px;
-  margin: 32px 0;
-  text-align: center;
-}
-.article-cta h3 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-.article-cta p { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
-.article-cta button {
-  padding: 12px 28px;
-  background: var(--red);
-  color: #fff;
-  border: none;
+/* 3-column grid */
+.news-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.nc3 {
+  background: var(--white);
   cursor: pointer;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   transition: background 0.15s;
+  display: flex; flex-direction: column;
 }
-.article-cta button:hover { background: var(--red-dark); }
-
-/* Comparison table */
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0 28px;
-  font-size: 13px;
+.nc3:hover { background: var(--bg); }
+.nc3-thumb {
+  height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px solid var(--border);
 }
-.compare-table th {
-  background: var(--bg);
-  padding: 10px 14px;
-  text-align: left;
+.nc3-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+.nc3-cat {
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--red); margin-bottom: 6px;
+}
+.nc3-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  border: 1px solid var(--border);
+  font-size: 12px; font-weight: 800; color: var(--text);
+  line-height: 1.4; margin-bottom: 8px; flex: 1;
+}
+.nc3-meta { font-size: 10px; color: var(--text3); margin-top: auto; }
+.nc3-dot { margin: 0 4px; }
+
+/* List-style articles */
+.news-list { display: flex; flex-direction: column; }
+.nl-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: opacity 0.15s;
+  align-items: flex-start;
+}
+.nl-item:last-child { border-bottom: none; }
+.nl-item:hover { opacity: 0.72; }
+.nl-thumb {
+  width: 72px; height: 56px; border-radius: 6px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.nl-body { flex: 1; min-width: 0; }
+.nl-cat {
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--red); margin-bottom: 4px;
+}
+.nl-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800; color: var(--text);
+  line-height: 1.35; margin-bottom: 5px;
+}
+.nl-meta { font-size: 10px; color: var(--text3); }
+.nl-dot { margin: 0 4px; }
+
+/* No results */
+.news-no-results {
+  text-align: center; padding: 64px 20px; color: var(--text3);
+  display: none;
+}
+.news-no-results svg { margin: 0 auto 16px; display: block; opacity: 0.3; }
+
+/* ── SIDEBAR COLUMN ── */
+.news-sidebar { display: flex; flex-direction: column; gap: 28px; }
+
+.nws-block {}
+.nws-head {
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--text);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--text);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
 }
-.compare-table td {
-  padding: 10px 14px;
+.nws-head-accent { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+
+/* Trending list */
+.nws-trending { display: flex; flex-direction: column; }
+.nws-trend-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: opacity 0.15s;
+}
+.nws-trend-item:last-child { border-bottom: none; }
+.nws-trend-item:hover { opacity: 0.7; }
+.nws-trend-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px; font-weight: 900; color: var(--border2);
+  line-height: 1; min-width: 28px; padding-top: 2px;
+}
+.nws-trend-body {}
+.nws-trend-cat { font-size: 9px; font-weight: 800; color: var(--red); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
+.nws-trend-title { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.4; }
+.nws-trend-meta { font-size: 10px; color: var(--text3); margin-top: 3px; }
+
+/* Newsletter */
+.nws-newsletter {
+  background: var(--text);
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
+}
+.nws-nl-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.nws-nl-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-bottom: 14px; line-height: 1.5; }
+.nws-nl-input {
+  width: 100%; padding: 9px 11px; border: none; border-radius: 6px;
+  font-size: 12px; margin-bottom: 8px;
+  background: rgba(255,255,255,0.12); color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-sizing: border-box;
+}
+.nws-nl-input::placeholder { color: rgba(255,255,255,0.45); }
+.nws-nl-input:focus { outline: none; border-color: var(--red); background: rgba(255,255,255,0.18); }
+.nws-nl-btn {
+  width: 100%; padding: 9px; border: none;
+  background: var(--red); color: #fff; border-radius: 6px;
+  font-size: 12px; font-weight: 800; cursor: pointer;
+  transition: opacity 0.15s;
+}
+.nws-nl-btn:hover { opacity: 0.85; }
+.nws-nl-note { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 8px; text-align: center; }
+
+/* Quick tools sidebar */
+.nws-tools { display: flex; flex-direction: column; gap: 6px; }
+.nws-tool-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 12px;
   border: 1px solid var(--border);
-  color: var(--text2);
-  vertical-align: top;
+  background: var(--white); border-radius: 7px;
+  font-size: 12px; font-weight: 600; color: var(--text2);
+  cursor: pointer; transition: border-color 0.15s, color 0.15s;
 }
-.compare-table tr:hover td { background: var(--bg); }
-.compare-table .check { color: var(--green); font-weight: 700; }
-.compare-table .cross { color: var(--red); }
+.nws-tool-btn:hover { border-color: var(--red); color: var(--red); }
+.nws-tool-badge {
+  margin-left: auto; font-size: 9px; font-weight: 800;
+  background: var(--red-bg); color: var(--red);
+  padding: 2px 6px; border-radius: 99px;
+}
+
+/* Article back button */
+.article-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 24px; padding: 8px 14px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  transition: border-color 0.15s, color 0.15s;
+}
+.article-back:hover { border-color: var(--red); color: var(--red); }
 
 /* Related articles */
 .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
 .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
 .related-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.15s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px;
+  cursor: pointer; transition: all 0.15s;
 }
 .related-card:hover { border-color: var(--red); box-shadow: var(--shadow); transform: translateY(-2px); }
 .related-card .rc-emoji { font-size: 24px; margin-bottom: 8px; }
 .related-card .rc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
 .related-card .rc-cat { font-size: 11px; color: var(--text3); margin-top: 4px; }
 
-@media (max-width: 768px) {
-  .blog-grid { grid-template-columns: 1fr; }
-  .related-grid { grid-template-columns: 1fr 1fr; }
+/* Responsive */
+@media (max-width: 960px) {
+  .news-body { grid-template-columns: 1fr; padding: 24px 20px 48px; }
+  .news-sidebar { order: 2; }
+  .news-main { order: 1; }
+  .news-hero-story { grid-template-columns: 1fr; }
+  .nhs-thumb { min-height: 160px; }
+  .news-3col { grid-template-columns: 1fr 1fr; }
+  .news-titlebar-inner { padding: 0 20px; }
+  .news-cats-inner { padding: 0 20px; }
 }
+@media (max-width: 560px) {
+  .news-3col { grid-template-columns: 1fr; }
+  .news-titlebar-inner { flex-direction: column; align-items: flex-start; }
+}
+
 </style>
 </head>
 <body>
@@ -1564,146 +1615,258 @@ footer {
 <!-- ─── BLOG SECTION ─── -->
 <div id="blog-section">
 
-  <!-- Blog hero -->
-  <div class="blog-hero">
-    <h2>📖 PDF & Document <span class="highlight">Guides & Tips</span></h2>
-    <p>Practical how-to articles, expert tips, and tool comparisons to help you work smarter with PDFs and documents.</p>
+<!-- CLEAN NEWS TITLE BAR -->
+<div class="news-titlebar">
+  <div class="news-titlebar-inner">
+    <div class="news-titlebar-left">
+      <div class="news-titlebar-eyebrow">DocConverter — Blog & Guides</div>
+      <h1>PDF &amp; Document Tips</h1>
+      <div class="news-titlebar-meta">
+        <span>9 Articles</span>
+        <span>5 Categories</span>
+        <span>Free · Always updated</span>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);text-align:right;line-height:1.6">
+      Expert guides · How-tos<br>Tool reviews · Tips &amp; tricks
+    </div>
   </div>
+</div>
 
-  <div class="page" style="padding-top:32px">
+<!-- CATEGORY TABS STRIP -->
+<div class="news-cats-strip">
+  <div class="news-cats-inner" id="news-cats-inner">
+    <button class="news-cat-tab active" onclick="filterBlog('all',this)" data-tag="all">All</button>
+    <button class="news-cat-tab" onclick="filterBlog('compress',this)" data-tag="compress">Compress &amp; Optimize</button>
+    <button class="news-cat-tab" onclick="filterBlog('convert',this)" data-tag="convert">Convert Files</button>
+    <button class="news-cat-tab" onclick="filterBlog('tools',this)" data-tag="tools">Tool Reviews</button>
+    <button class="news-cat-tab" onclick="filterBlog('tips',this)" data-tag="tips">Tips &amp; Tricks</button>
+    <button class="news-cat-tab" onclick="filterBlog('security',this)" data-tag="security">Security &amp; Privacy</button>
+  </div>
+</div>
 
-    <!-- Blog filter pills -->
-    <div class="blog-filter">
-      <button class="blog-pill active" onclick="filterBlog('all', this)">All Articles</button>
-      <button class="blog-pill" onclick="filterBlog('compress', this)">Compress & Optimize</button>
-      <button class="blog-pill" onclick="filterBlog('convert', this)">Convert Files</button>
-      <button class="blog-pill" onclick="filterBlog('tools', this)">Tool Reviews</button>
-      <button class="blog-pill" onclick="filterBlog('tips', this)">Tips & Tricks</button>
-      <button class="blog-pill" onclick="filterBlog('security', this)">Security & Privacy</button>
+<!-- NEWS BODY -->
+<div class="news-body">
+
+  <!-- ── MAIN COLUMN ── -->
+  <main class="news-main" id="news-main">
+
+    <!-- Hero story -->
+    <div class="news-hero-story" onclick="openArticle('best-pdf-converter-2026')" id="news-hero-story" data-tags="tools convert">
+      <div class="nhs-thumb">
+        <div class="nhs-thumb-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <span class="nhs-badge">Editor's Pick</span>
+      </div>
+      <div class="nhs-body">
+        <div class="nhs-cat">Tool Reviews</div>
+        <h2 class="nhs-title">Best Free PDF Converter in 2026 — Tested &amp; Ranked</h2>
+        <p class="nhs-excerpt">We tested 12 free PDF converters and ranked them on speed, quality, privacy, and ease of use. Spoiler: browser-based tools won. Full breakdown with scores inside.</p>
+        <div class="nhs-byline">
+          <div class="nhs-avatar">DC</div>
+          <span class="nhs-author">DocConverter Team</span>
+          <span class="nhs-dot">·</span>
+          <span>Jan 2026</span>
+          <span class="nhs-dot">·</span>
+          <span>9 min read</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Blog listing -->
-    <div id="blog-listing">
-      <div class="blog-grid" id="blog-grid">
+    <!-- 3-column grid -->
+    <div class="news-section-head">
+      <div class="news-section-head-line-left"></div>
+      <span class="news-section-head-label" id="grid-section-label">Latest Articles</span>
+      <div class="news-section-head-line"></div>
+    </div>
 
-        <div class="blog-card" onclick="openArticle('compress-pdf-quality')" data-tags="compress">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fef3e2,#fff0f3)">🗜️</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#fef3e2;color:#e37400">Compress & Optimize</span>
-            <div class="blog-card-title">How to Compress a PDF Without Losing Quality</div>
-            <div class="blog-card-excerpt">Learn the best methods to shrink PDF file size while keeping text sharp and images clear — ideal for email, web, and storage.</div>
-            <div class="blog-card-meta">
-              <span>📅 June 2025</span><span class="dot">·</span><span>⏱ 6 min read</span><span class="dot">·</span><span>🔥 Popular</span>
-            </div>
-          </div>
+    <div class="news-3col" id="news-3col">
+
+      <div class="nc3" onclick="openArticle('compress-pdf-quality')" data-tags="compress">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#fef3e2,#fff0f3)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e37400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M12 10v6"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Compress &amp; Optimize</div>
+          <div class="nc3-title">How to Compress a PDF Without Losing Quality</div>
+          <div class="nc3-meta">June 2025<span class="nc3-dot">·</span>6 min · 🔥 Popular</div>
         </div>
-
-        <div class="blog-card" onclick="openArticle('best-pdf-converter-2026')" data-tags="tools convert">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#f0ebff)">🏆</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#e8f0fe;color:#1a73e8">Tool Reviews</span>
-            <div class="blog-card-title">Best Free PDF Converter in 2026 (Tested & Ranked)</div>
-            <div class="blog-card-excerpt">We tested 12 free PDF converters and ranked them on speed, quality, privacy, and ease of use. Here's who won.</div>
-            <div class="blog-card-meta">
-              <span>📅 Jan 2026</span><span class="dot">·</span><span>⏱ 9 min read</span><span class="dot">·</span><span>⭐ Editor's Pick</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('pdf-to-word-guide')" data-tags="convert">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#e6f4ea)">📝</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#e6f4ea;color:#1e8c45">Convert Files</span>
-            <div class="blog-card-title">How to Convert PDF to Word Without Losing Formatting</div>
-            <div class="blog-card-excerpt">Converting PDF to Word can be messy. These proven techniques preserve tables, fonts, and layout so your document stays professional.</div>
-            <div class="blog-card-meta">
-              <span>📅 May 2025</span><span class="dot">·</span><span>⏱ 5 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('merge-split-pdf')" data-tags="tips">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fff0f3,#fef3e2)">✂️</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#fff0f3;color:#e8163d">Tips & Tricks</span>
-            <div class="blog-card-title">Merge vs. Split PDF: When to Use Each (With Examples)</div>
-            <div class="blog-card-excerpt">Not sure whether to merge or split your PDFs? This guide explains the right approach for invoices, contracts, reports, and more.</div>
-            <div class="blog-card-meta">
-              <span>📅 Apr 2025</span><span class="dot">·</span><span>⏱ 4 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('pdf-security-guide')" data-tags="security">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e6f4ea,#e0f5fa)">🔐</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#e0f5fa;color:#0891b2">Security & Privacy</span>
-            <div class="blog-card-title">How to Password-Protect a PDF (and When You Should)</div>
-            <div class="blog-card-excerpt">A complete guide to PDF encryption — how strong passwords work, what protection actually means, and which tools keep your files private.</div>
-            <div class="blog-card-meta">
-              <span>📅 Mar 2025</span><span class="dot">·</span><span>⏱ 7 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('image-compression-guide')" data-tags="compress tips">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#f0ebff,#e8f0fe)">🖼️</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#f0ebff;color:#7c3aed">Compress & Optimize</span>
-            <div class="blog-card-title">How to Compress Images for Web Without Losing Sharpness</div>
-            <div class="blog-card-excerpt">JPG vs PNG vs WebP — which format wins for the web? Plus a step-by-step process to cut image size by 70% without visible quality loss.</div>
-            <div class="blog-card-meta">
-              <span>📅 Feb 2025</span><span class="dot">·</span><span>⏱ 5 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('word-to-pdf-guide')" data-tags="convert tips">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#e8f0fe,#fff0f3)">📄</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#e8f0fe;color:#1a73e8">Convert Files</span>
-            <div class="blog-card-title">Word to PDF: 5 Methods Compared (Speed, Quality & Privacy)</div>
-            <div class="blog-card-excerpt">Print-to-PDF, Microsoft Save As, online tools — each has tradeoffs. We compare 5 methods so you can pick the right one for your use case.</div>
-            <div class="blog-card-meta">
-              <span>📅 Jan 2025</span><span class="dot">·</span><span>⏱ 6 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('ocr-pdf-guide')" data-tags="tips convert">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#f0ebff,#fef3e2)">🔍</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#f0ebff;color:#7c3aed">Tips & Tricks</span>
-            <div class="blog-card-title">What Is OCR and How Does It Make Scanned PDFs Searchable?</div>
-            <div class="blog-card-excerpt">Scanned PDFs are just images — OCR turns them into real, searchable, copyable text. Here's how it works and when you need it.</div>
-            <div class="blog-card-meta">
-              <span>📅 Dec 2024</span><span class="dot">·</span><span>⏱ 4 min read</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="blog-card" onclick="openArticle('reduce-pdf-email')" data-tags="compress tips">
-          <div class="blog-card-thumb" style="background:linear-gradient(135deg,#fef3e2,#e6f4ea)">📧</div>
-          <div class="blog-card-body">
-            <span class="blog-card-cat" style="background:#fef3e2;color:#e37400">Compress & Optimize</span>
-            <div class="blog-card-title">How to Reduce PDF Size for Email Attachments (Under 10 MB)</div>
-            <div class="blog-card-excerpt">Gmail and Outlook have strict attachment limits. These quick tricks get your PDF under 10 MB — or even 5 MB — in under a minute.</div>
-            <div class="blog-card-meta">
-              <span>📅 Nov 2024</span><span class="dot">·</span><span>⏱ 3 min read</span>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </div><!-- /#blog-listing -->
 
-    <!-- ─── ARTICLE VIEW (hidden until opened) ─── -->
-    <div id="article-view">
-      <button class="article-back" onclick="closeBlogArticle()">← Back to all articles</button>
+      <div class="nc3" onclick="openArticle('pdf-to-word-guide')" data-tags="convert">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#e8f0fe,#e6f4ea)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Convert Files</div>
+          <div class="nc3-title">PDF to Word Without Losing Formatting</div>
+          <div class="nc3-meta">May 2025<span class="nc3-dot">·</span>5 min</div>
+        </div>
+      </div>
+
+      <div class="nc3" onclick="openArticle('merge-split-pdf')" data-tags="tips">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#fff0f3,#fef3e2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8163d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M4 8l4-4 4 4"/><path d="M4 16l4 4 4-4"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Tips &amp; Tricks</div>
+          <div class="nc3-title">Merge vs. Split PDF — When to Use Each</div>
+          <div class="nc3-meta">Apr 2025<span class="nc3-dot">·</span>4 min</div>
+        </div>
+      </div>
+
+      <div class="nc3" onclick="openArticle('pdf-security-guide')" data-tags="security">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#e6f4ea,#e0f5fa)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Security &amp; Privacy</div>
+          <div class="nc3-title">How to Password-Protect a PDF</div>
+          <div class="nc3-meta">Mar 2025<span class="nc3-dot">·</span>7 min</div>
+        </div>
+      </div>
+
+      <div class="nc3" onclick="openArticle('image-compression-guide')" data-tags="compress tips">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#f0ebff,#e8f0fe)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Compress &amp; Optimize</div>
+          <div class="nc3-title">Compress Images for Web Without Losing Sharpness</div>
+          <div class="nc3-meta">Feb 2025<span class="nc3-dot">·</span>5 min</div>
+        </div>
+      </div>
+
+      <div class="nc3" onclick="openArticle('word-to-pdf-guide')" data-tags="convert tips">
+        <div class="nc3-thumb" style="background:linear-gradient(135deg,#e8f0fe,#fff0f3)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="7 15 12 20 17 15"/></svg></div>
+        <div class="nc3-body">
+          <div class="nc3-cat">Convert Files</div>
+          <div class="nc3-title">Word to PDF — 5 Methods Compared</div>
+          <div class="nc3-meta">Jan 2025<span class="nc3-dot">·</span>6 min</div>
+        </div>
+      </div>
+
+    </div><!-- /.news-3col -->
+
+    <!-- List-style row -->
+    <div class="news-section-head" style="margin-top:28px">
+      <div class="news-section-head-line-left"></div>
+      <span class="news-section-head-label">More Guides</span>
+      <div class="news-section-head-line"></div>
+    </div>
+
+    <div class="news-list" id="news-list">
+
+      <div class="nl-item" onclick="openArticle('ocr-pdf-guide')" data-tags="tips convert">
+        <div class="nl-thumb" style="background:linear-gradient(135deg,#f0ebff,#fef3e2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="nl-body">
+          <div class="nl-cat">Tips &amp; Tricks</div>
+          <div class="nl-title">What Is OCR and How Does It Make Scanned PDFs Searchable?</div>
+          <div class="nl-meta">Dec 2024<span class="nl-dot">·</span>4 min read</div>
+        </div>
+      </div>
+
+      <div class="nl-item" onclick="openArticle('reduce-pdf-email')" data-tags="compress tips">
+        <div class="nl-thumb" style="background:linear-gradient(135deg,#fef3e2,#e6f4ea)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e37400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="nl-body">
+          <div class="nl-cat">Compress &amp; Optimize</div>
+          <div class="nl-title">How to Reduce PDF Size for Email Attachments (Under 10 MB)</div>
+          <div class="nl-meta">Nov 2024<span class="nl-dot">·</span>3 min read</div>
+        </div>
+      </div>
+
+    </div><!-- /.news-list -->
+
+    <!-- No results -->
+    <div class="news-no-results" id="news-no-results">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div style="font-size:15px;font-weight:700;margin-bottom:6px">No articles in this category yet</div>
+      <div style="font-size:13px">More guides coming soon!</div>
+    </div>
+
+    <!-- Article view -->
+    <div id="article-view" style="display:none">
+      <button class="article-back" onclick="closeBlogArticle()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to all articles
+      </button>
       <div id="article-content"></div>
     </div>
 
-  </div><!-- /.page -->
+  </main>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="news-sidebar">
+
+    <!-- Trending -->
+    <div class="nws-block">
+      <div class="nws-head"><span class="nws-head-accent"></span>Trending Now</div>
+      <div class="nws-trending">
+        <div class="nws-trend-item" onclick="openArticle('compress-pdf-quality')">
+          <div class="nws-trend-num">01</div>
+          <div class="nws-trend-body">
+            <div class="nws-trend-cat">Compress</div>
+            <div class="nws-trend-title">How to Compress a PDF Without Losing Quality</div>
+            <div class="nws-trend-meta">6 min · 🔥 Popular</div>
+          </div>
+        </div>
+        <div class="nws-trend-item" onclick="openArticle('best-pdf-converter-2026')">
+          <div class="nws-trend-num">02</div>
+          <div class="nws-trend-body">
+            <div class="nws-trend-cat">Tools</div>
+            <div class="nws-trend-title">Best Free PDF Converter in 2026</div>
+            <div class="nws-trend-meta">9 min · ⭐ Editor's Pick</div>
+          </div>
+        </div>
+        <div class="nws-trend-item" onclick="openArticle('pdf-to-word-guide')">
+          <div class="nws-trend-num">03</div>
+          <div class="nws-trend-body">
+            <div class="nws-trend-cat">Convert</div>
+            <div class="nws-trend-title">PDF to Word Without Losing Formatting</div>
+            <div class="nws-trend-meta">5 min read</div>
+          </div>
+        </div>
+        <div class="nws-trend-item" onclick="openArticle('pdf-security-guide')">
+          <div class="nws-trend-num">04</div>
+          <div class="nws-trend-body">
+            <div class="nws-trend-cat">Security</div>
+            <div class="nws-trend-title">How to Password-Protect a PDF</div>
+            <div class="nws-trend-meta">7 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="nws-newsletter">
+      <div class="nws-nl-title">Stay in the loop</div>
+      <div class="nws-nl-sub">New guides and PDF tips straight to your inbox. No spam.</div>
+      <input class="nws-nl-input" type="email" placeholder="your@email.com" id="nl-email">
+      <button class="nws-nl-btn" onclick="nlSignup()">Subscribe Free →</button>
+      <div class="nws-nl-note">Unsubscribe anytime</div>
+    </div>
+
+    <!-- Quick tools -->
+    <div class="nws-block">
+      <div class="nws-head"><span class="nws-head-accent"></span>Try a Tool Now</div>
+      <div class="nws-tools">
+        <button class="nws-tool-btn" onclick="showHome();openTool('compress-pdf')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M12 10v6"/></svg>
+          Compress PDF <span class="nws-tool-badge">Free</span>
+        </button>
+        <button class="nws-tool-btn" onclick="showHome();openTool('pdf-to-word')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          PDF to Word <span class="nws-tool-badge">Free</span>
+        </button>
+        <button class="nws-tool-btn" onclick="showHome();openTool('merge')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/><path d="M16 6h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+          Merge PDF <span class="nws-tool-badge">Free</span>
+        </button>
+        <button class="nws-tool-btn" onclick="showHome();openTool('protect')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Protect PDF <span class="nws-tool-badge">Free</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- About box -->
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px">About This Blog</div>
+      <p style="font-size:12px;color:var(--text2);line-height:1.7;margin:0">Practical guides written by the DocConverter team. All tools are free, browser-based, and private — your files never leave your device.</p>
+    </div>
+
+  </aside>
+
+</div><!-- /.news-body -->
 </div><!-- /#blog-section -->
 
 <!-- ─── FOOTER ─── -->
@@ -2789,16 +2952,58 @@ function showHome() {
 }
 
 function filterBlog(tag, btn) {
-  document.querySelectorAll('.blog-pill').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.blog-card').forEach(card => {
-    const tags = card.dataset.tags || '';
-    card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+  // Update tab active state
+  document.querySelectorAll('.news-cat-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  // Hero story
+  const hero = document.getElementById('news-hero-story');
+  if (hero) {
+    const heroTags = hero.dataset.tags || '';
+    hero.style.display = (tag === 'all' || heroTags.includes(tag)) ? '' : 'none';
+  }
+
+  // 3-col grid cards
+  let visible3 = 0;
+  document.querySelectorAll('#news-3col .nc3').forEach(card => {
+    const show = tag === 'all' || (card.dataset.tags||'').includes(tag);
+    card.style.display = show ? '' : 'none';
+    if (show) visible3++;
   });
+
+  // List items
+  let visibleList = 0;
+  document.querySelectorAll('#news-list .nl-item').forEach(card => {
+    const show = tag === 'all' || (card.dataset.tags||'').includes(tag);
+    card.style.display = show ? 'flex' : 'none';
+    if (show) visibleList++;
+  });
+
+  // Section labels
+  const names = {'all':'Latest Articles','compress':'Compress & Optimize','convert':'Convert Files','tools':'Tool Reviews','tips':'Tips & Tricks','security':'Security & Privacy'};
+  const lbl = document.getElementById('grid-section-label');
+  if (lbl) lbl.textContent = names[tag] || 'Articles';
+
+  // No results
+  const noRes = document.getElementById('news-no-results');
+  const total = visible3 + visibleList + (hero && hero.style.display !== 'none' ? 1 : 0);
+  if (noRes) noRes.style.display = total === 0 ? 'block' : 'none';
+}
+
+function nlSignup() {
+  const el = document.getElementById('nl-email');
+  if (!el || !el.value.includes('@')) { if(el) el.style.borderColor='#e8163d'; return; }
+  el.style.borderColor='';
+  el.value = '';
+  el.placeholder = '✓ Subscribed!';
+  setTimeout(() => { if(el) el.placeholder = 'your@email.com'; }, 3000);
 }
 
 function closeBlogArticle() {
-  document.getElementById('blog-listing').style.display = 'block';
+  const els = ['news-hero-story','news-3col','news-list'];
+  els.forEach(id => { const el = document.getElementById(id); if(el) el.style.display = ''; });
+  document.querySelectorAll('.news-section-head').forEach(el => el.style.display = '');
+  document.getElementById('news-no-results').style.display = 'none';
   document.getElementById('article-view').style.display = 'none';
   window.scrollTo(0, 0);
 }
@@ -3431,7 +3636,11 @@ function openArticle(id) {
   const article = ARTICLES[id];
   if (!article) return;
 
-  document.getElementById('blog-listing').style.display = 'none';
+  // Hide main blog content
+  ['news-hero-story','news-3col','news-list','news-no-results'].forEach(eid => {
+    const el = document.getElementById(eid); if(el) el.style.display = 'none';
+  });
+  document.querySelectorAll('.news-section-head').forEach(el => el.style.display = 'none');
   document.getElementById('article-view').style.display = 'block';
 
   const relatedHTML = Object.entries(ARTICLES)
