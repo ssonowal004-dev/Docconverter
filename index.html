@@ -522,6 +522,13 @@ nav {
   transition: background 0.15s;
 }
 .dz-btn:hover { background: var(--red-dark); }
+.dz-btn[style*="var(--teal)"]:hover { filter: brightness(0.9); }
+
+/* ZIP tool two-button layout on mobile */
+@media (max-width: 400px) {
+  .zip-pick-btns { flex-direction: column !important; align-items: stretch !important; }
+  .zip-pick-btns .dz-btn { justify-content: center; }
+}
 
 /* ─── DRAGGABLE FILE LIST ─── */
 .file-row {
@@ -1292,14 +1299,14 @@ footer {
       <div class="tool-card" onclick="openTool('jpg-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="13" height="13" rx="2"/><circle cx="7.5" cy="7.5" r="1.5"/><polyline points="16 3 21 3 21 8"/><line x1="11" y1="13" x2="21" y2="3"/><polyline points="10 13 3 13 3 19 16 19 16 13"/></svg></div>
         <div class="tc-name">JPG to PDF</div>
-        <div class="tc-desc">Embed images into a PDF file</div>
+        <div class="tc-desc">Combine multiple images into one PDF</div>
         <span class="tc-tag">JPG → PDF</span>
       </div>
 
       <div class="tool-card" onclick="openTool('pdf-to-jpg')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><polyline points="20 17 17 14 13 18"/></svg></div>
         <div class="tc-name">PDF to JPG</div>
-        <div class="tc-desc">Convert each PDF page to a JPG image</div>
+        <div class="tc-desc">Convert PDF pages to JPG — select multiple PDFs</div>
         <span class="tc-tag">PDF → JPG</span>
       </div>
 
@@ -1322,6 +1329,13 @@ footer {
         <div class="tc-name">Protect PDF</div>
         <div class="tc-desc">Password-protect your PDF file</div>
         <span class="tc-tag">PDF → PDF</span>
+      </div>
+
+      <div class="tool-card" onclick="openTool('files-to-zip')" style="--card-color:#0891b2;--card-bg:#e0f5fa">
+        <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="tc-name">Files to ZIP</div>
+        <div class="tc-desc">Pack multiple files into one ZIP archive</div>
+        <span class="tc-tag">Files → ZIP</span>
       </div>
 
     </div>
@@ -1434,14 +1448,14 @@ footer {
       <div class="tool-card" onclick="openTool('pdf-to-jpg')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><polyline points="20 17 17 14 13 18"/></svg></div>
         <div class="tc-name">PDF to JPG</div>
-        <div class="tc-desc">Convert each PDF page to a JPG image</div>
+        <div class="tc-desc">Convert PDF pages to JPG — select multiple PDFs</div>
         <span class="tc-tag">PDF → JPG</span>
       </div>
 
       <div class="tool-card" onclick="openTool('pdf-to-png')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><polyline points="20 18 17 15 13 19"/></svg></div>
         <div class="tc-name">PDF to PNG</div>
-        <div class="tc-desc">Render every PDF page as a PNG</div>
+        <div class="tc-desc">Convert PDF pages to PNG — select multiple PDFs</div>
         <span class="tc-tag">PDF → PNG</span>
       </div>
 
@@ -1477,14 +1491,14 @@ footer {
       <div class="tool-card" onclick="openTool('jpg-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="13" height="13" rx="2"/><circle cx="7.5" cy="7.5" r="1.5"/><polyline points="16 3 21 3 21 8"/><line x1="11" y1="13" x2="21" y2="3"/><polyline points="10 13 3 13 3 19 16 19 16 13"/></svg></div>
         <div class="tc-name">JPG to PDF</div>
-        <div class="tc-desc">Embed images into a PDF file</div>
+        <div class="tc-desc">Combine multiple images into one PDF</div>
         <span class="tc-tag">JPG → PDF</span>
       </div>
 
       <div class="tool-card" onclick="openTool('img-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="7 15 12 20 17 15"/><line x1="12" y1="9" x2="12" y2="20"/></svg></div>
         <div class="tc-name">Image to PDF</div>
-        <div class="tc-desc">Turn PNG or JPG into a PDF file</div>
+        <div class="tc-desc">Combine multiple images into one PDF</div>
         <span class="tc-tag">IMG → PDF</span>
       </div>
 
@@ -1496,6 +1510,13 @@ footer {
     <div class="section-title"><div class="st-line" style="background:#7c3aed"></div>Image Tools</div>
     <div class="tool-grid">
 
+      <div class="tool-card" onclick="openTool('files-to-zip')" style="--card-color:#0891b2;--card-bg:#e0f5fa">
+        <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="tc-name">Files to ZIP</div>
+        <div class="tc-desc">Pack multiple files into one ZIP archive</div>
+        <span class="tc-tag">Files → ZIP</span>
+      </div>
+
       <div class="tool-card" onclick="openTool('compress-img')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><polyline points="20 17 17 14 13 18"/></svg></div>
         <div class="tc-name">Compress Image</div>
@@ -1506,14 +1527,14 @@ footer {
       <div class="tool-card" onclick="openTool('img-to-pdf')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="7 15 12 20 17 15"/><line x1="12" y1="9" x2="12" y2="20"/></svg></div>
         <div class="tc-name">Image to PDF</div>
-        <div class="tc-desc">Turn PNG or JPG into a PDF file</div>
+        <div class="tc-desc">Combine multiple images into one PDF</div>
         <span class="tc-tag">IMG → PDF</span>
       </div>
 
       <div class="tool-card" onclick="openTool('pdf-to-png')" style="--card-color:#7c3aed;--card-bg:#f0ebff">
         <div class="tc-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="10" cy="14" r="2"/><polyline points="20 18 17 15 13 19"/></svg></div>
         <div class="tc-name">PDF to PNG</div>
-        <div class="tc-desc">Render every PDF page as a PNG</div>
+        <div class="tc-desc">Convert PDF pages to PNG — select multiple PDFs</div>
         <span class="tc-tag">PDF → PNG</span>
       </div>
 
@@ -1962,6 +1983,7 @@ footer {
 </div>
 
 <input type="file" id="file-input" style="display:none" onchange="handleFileInputChange(event)">
+<input type="file" id="folder-input" style="display:none" webkitdirectory mozdirectory multiple onchange="handleFolderInputChange(event)">
 
 <script>
 // ─── LIBRARY LOADER ──────────────────────────────────────────────────────────
@@ -1991,14 +2013,14 @@ const TOOLS = {
   'pdf-to-word':    { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><line x1='16' y1='13' x2='8' y2='13'/><line x1='16' y1='17' x2='8' y2='17'/><line x1='10' y1='9' x2='8' y2='9'/></svg>`, title:'PDF to Word',       desc:'Extract PDF text into an editable .docx file', accepts:'.pdf', category:'convert', color:'#1a73e8', bg:'#e8f0fe', action: convertPdfToWord },
   'pdf-to-excel':   { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2'/><line x1='3' y1='9' x2='21' y2='9'/><line x1='3' y1='15' x2='21' y2='15'/><line x1='9' y1='3' x2='9' y2='21'/><line x1='15' y1='3' x2='15' y2='21'/></svg>`, title:'PDF to Excel',      desc:'Extract tables from PDF into a spreadsheet',   accepts:'.pdf', category:'convert', color:'#1e8c45', bg:'#e6f4ea', action: convertPdfToExcel },
   'pdf-to-ppt':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='20' height='14' rx='2' ry='2'/><line x1='8' y1='21' x2='16' y2='21'/><line x1='12' y1='17' x2='12' y2='21'/></svg>`, title:'PDF to PowerPoint', desc:'Convert PDF pages into PPTX slides',            accepts:'.pdf', category:'convert', color:'#e37400', bg:'#fef3e2', action: convertPdfToPpt },
-  'pdf-to-jpg':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><circle cx='10' cy='14' r='2'/><polyline points='20 17 17 14 13 18'/></svg>`, title:'PDF to JPG',        desc:'Render each PDF page as a JPG image',          accepts:'.pdf', category:'convert', color:'#7c3aed', bg:'#f0ebff', action: convertPdfToJpg },
-  'pdf-to-png':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><circle cx='10' cy='14' r='2'/><polyline points='20 18 17 15 13 19'/></svg>`, title:'PDF to PNG',        desc:'Render each PDF page as a PNG image',          accepts:'.pdf', category:'image',   color:'#7c3aed', bg:'#f0ebff', action: convertPdfToPng },
+  'pdf-to-jpg':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><circle cx='10' cy='14' r='2'/><polyline points='20 17 17 14 13 18'/></svg>`, title:'PDF to JPG',        desc:'Render each PDF page as a JPG image',          accepts:'.pdf', multi:true, category:'convert', color:'#7c3aed', bg:'#f0ebff', action: convertPdfToJpg },
+  'pdf-to-png':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><circle cx='10' cy='14' r='2'/><polyline points='20 18 17 15 13 19'/></svg>`, title:'PDF to PNG',        desc:'Render each PDF page as a PNG image',          accepts:'.pdf', multi:true, category:'image',   color:'#7c3aed', bg:'#f0ebff', action: convertPdfToPng },
   // other → PDF
   'word-to-pdf':    { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><polyline points='7 15 12 20 17 15'/><line x1='12' y1='9' x2='12' y2='20'/></svg>`, title:'Word to PDF',       desc:'Convert your DOCX document to PDF',            accepts:'.docx,.doc', category:'convert', color:'#1a73e8', bg:'#e8f0fe', action: convertWordToPdf },
   'ppt-to-pdf':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='3' width='20' height='14' rx='2' ry='2'/><line x1='8' y1='21' x2='16' y2='21'/><line x1='12' y1='17' x2='12' y2='21'/></svg>`, title:'PowerPoint to PDF', desc:'Convert PPTX presentation to PDF',             accepts:'.pptx,.ppt', category:'convert', color:'#e37400', bg:'#fef3e2', action: convertPptToPdf },
   'excel-to-pdf':   { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='2' width='14' height='14' rx='2'/><line x1='2' y1='8' x2='16' y2='8'/><line x1='8' y1='2' x2='8' y2='16'/><path d='M18 12v6a2 2 0 0 1-2 2H8'/><polyline points='15 16 18 19 21 16'/></svg>`, title:'Excel to PDF',      desc:'Export your spreadsheet as a PDF file',        accepts:'.xlsx,.xls,.csv', category:'convert', color:'#1e8c45', bg:'#e6f4ea', action: convertExcelToPdf },
-  'jpg-to-pdf':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='13' height='13' rx='2'/><circle cx='7.5' cy='7.5' r='1.5'/><polyline points='16 3 21 3 21 8'/><line x1='11' y1='13' x2='21' y2='3'/><polyline points='10 13 3 13 3 19 16 19 16 13'/></svg>`, title:'JPG to PDF',        desc:'Embed your JPG or PNG image into a PDF',       accepts:'.jpg,.jpeg,.png,.webp,.gif', category:'convert', color:'#7c3aed', bg:'#f0ebff', action: convertImageToPdf },
-  'img-to-pdf':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><polyline points='7 15 12 20 17 15'/><line x1='12' y1='9' x2='12' y2='20'/></svg>`, title:'Image to PDF',      desc:'Convert any image into a PDF file',            accepts:'.jpg,.jpeg,.png,.webp,.gif', category:'image',   color:'#7c3aed', bg:'#f0ebff', action: convertImageToPdf },
+  'jpg-to-pdf':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='13' height='13' rx='2'/><circle cx='7.5' cy='7.5' r='1.5'/><polyline points='16 3 21 3 21 8'/><line x1='11' y1='13' x2='21' y2='3'/><polyline points='10 13 3 13 3 19 16 19 16 13'/></svg>`, title:'JPG to PDF',        desc:'Embed your JPG or PNG images into a PDF',      accepts:'.jpg,.jpeg,.png,.webp,.gif', multi:true, category:'convert', color:'#7c3aed', bg:'#f0ebff', action: convertImageToPdf },
+  'img-to-pdf':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><polyline points='14 2 14 8 20 8'/><polyline points='7 15 12 20 17 15'/><line x1='12' y1='9' x2='12' y2='20'/></svg>`, title:'Image to PDF',      desc:'Convert any images into a single PDF file',    accepts:'.jpg,.jpeg,.png,.webp,.gif', multi:true, category:'image',   color:'#7c3aed', bg:'#f0ebff', action: convertImageToPdf },
   // PDF utilities
   'merge':          { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8 6H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3'/><path d='M16 6h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3'/><line x1='12' y1='2' x2='12' y2='22'/></svg>`, title:'Merge PDF',         desc:'Combine multiple PDF files into one document',  accepts:'.pdf', multi:true, category:'pdf', color:'#e8163d', bg:'#fff0f3', action: mergePdfs },
   'split':          { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2' x2='12' y2='22'/><path d='M4 8l4-4 4 4'/><path d='M4 16l4 4 4-4'/></svg>`, title:'Split PDF',         desc:'Split a PDF into individual pages or ranges',   accepts:'.pdf', category:'pdf',     color:'#e8163d', bg:'#fff0f3', action: splitPdf },
@@ -2015,6 +2037,8 @@ const TOOLS = {
   'resize-img':     { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='15 3 21 3 21 9'/><polyline points='9 21 3 21 3 15'/><line x1='21' y1='3' x2='14' y2='10'/><line x1='3' y1='21' x2='10' y2='14'/></svg>`, title:'Resize Image',      desc:'Resize image to custom width & height',          accepts:'.jpg,.jpeg,.png,.webp,.gif', category:'image', color:'#0891b2', bg:'#e0f5fa', action: resizeImage, hasResize: true },
   'crop-img':       { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2' x2='12' y2='22'/><path d='M4 8l4-4 4 4'/><path d='M4 16l4 4 4-4'/></svg>`, title:'Crop Image',        desc:'Crop image to a custom area',                    accepts:'.jpg,.jpeg,.png,.webp', category:'image',   color:'#0891b2', bg:'#e0f5fa', action: cropImage, hasCrop: true },
   'convert-img':    { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='17 1 21 5 17 9'/><path d='M3 11V9a4 4 0 0 1 4-4h14'/><polyline points='7 23 3 19 7 15'/><path d='M21 13v2a4 4 0 0 1-4 4H3'/></svg>`, title:'Convert Image',     desc:'Convert between JPG, PNG, WebP, GIF formats',    accepts:'.jpg,.jpeg,.png,.webp,.gif,.bmp', category:'image', color:'#1e8c45', bg:'#e6f4ea', action: convertImage, hasImgFormat: true },
+  // ZIP
+  'files-to-zip':   { icon:`<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/><polyline points='3.27 6.96 12 12.01 20.73 6.96'/><line x1='12' y1='22.08' x2='12' y2='12'/></svg>`, title:'Files to ZIP', desc:'Pack multiple files into a single ZIP archive', accepts:'*', multi:true, category:'utility', color:'#0891b2', bg:'#e0f5fa', action: convertFilesToZip },
 };
 
 // ─── STATE ──────────────────────────────────────────────────────────────────
@@ -2072,7 +2096,7 @@ function openTool(id) {
   document.getElementById('modal-desc').textContent = tool.desc;
 
   document.getElementById('tool-overlay').classList.add('open');
-  document.getElementById('file-input').accept = tool.accepts;
+  document.getElementById('file-input').accept = tool.accepts === '*' ? '' : tool.accepts;
   document.getElementById('file-input').multiple = !!tool.multi;
 
   renderModal('upload');
@@ -2094,14 +2118,36 @@ function renderModal(state) {
   if (!tool) return;
 
   if (state === 'upload') {
-    const multiLabel = tool.multi ? '<p style="font-size:12px;color:var(--text3);margin-top:8px">Select multiple files</p>' : '';
+    const formatsLabel = tool.accepts === '*' ? 'Any file type' : tool.accepts.replace(/\./g,'').toUpperCase().replace(/,/g,' · ');
+    const isZip = currentTool === 'files-to-zip';
+    const dropTitle = isZip ? 'Drop files or a folder here' : (tool.multi ? 'Drop your files here' : 'Drop your file here');
+
+    let uploadActions;
+    if (isZip) {
+      uploadActions = `
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+          <button class="dz-btn" onclick="event.stopPropagation();triggerFileInput()" style="display:inline-flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Add Files
+          </button>
+          <button class="dz-btn" onclick="event.stopPropagation();triggerFolderInput()" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            Add Folder
+          </button>
+        </div>
+        <p style="font-size:11px;color:var(--text3);margin-top:8px;text-align:center">Folder structure is preserved inside the ZIP</p>`;
+    } else {
+      const multiLabel = tool.multi ? '<p style="font-size:12px;color:var(--text3);margin-top:8px">Select multiple files</p>' : '';
+      uploadActions = `<button class="dz-btn" onclick="event.stopPropagation();triggerFileInput()" style="display:inline-flex;align-items:center;gap:6px">Browse files</button>${multiLabel}`;
+    }
+
     body.innerHTML = `
-      <div class="dropzone" id="dropzone" onclick="triggerFileInput()" ondragover="dzDragOver(event)" ondragleave="dzDragLeave()" ondrop="dzDrop(event)">
+      <div class="dropzone" id="dropzone" ondragover="dzDragOver(event)" ondragleave="dzDragLeave()" ondrop="dzDrop(event)" ${isZip ? '' : 'onclick="triggerFileInput()"'} style="${isZip ? 'cursor:default' : ''}">
         <div class="dz-icon">${tool.icon}</div>
-        <div class="dz-title">Drop your file here</div>
-        <div class="dz-sub">or click to browse your device</div>
-        <div class="dz-formats">${tool.accepts.replace(/\./g,'').toUpperCase().replace(/,/g,' · ')}</div>
-        ${multiLabel}
+        <div class="dz-title">${dropTitle}</div>
+        <div class="dz-sub">${isZip ? 'or use the buttons below' : 'or click to browse your device'}</div>
+        <div class="dz-formats">${formatsLabel}</div>
+        ${uploadActions}
       </div>
     `;
   }
@@ -2186,12 +2232,30 @@ function renderModal(state) {
              ondragend="mergeListDragEnd(event)">
           <span class="file-row-drag-handle" title="Drag to reorder">⠿</span>
           <div class="file-row-order">${i+1}</div>
-          <span class="file-row-icon">📄</span>
-          <div class="file-row-info"><div class="file-row-name">${f.name}</div><div class="file-row-meta">${formatSize(f.size)}</div></div>
+          <span class="file-row-icon">${f.webkitRelativePath ? '📁' : '📄'}</span>
+          <div class="file-row-info">
+            <div class="file-row-name">${f.webkitRelativePath || f.name}</div>
+            <div class="file-row-meta">${formatSize(f.size)}${f.webkitRelativePath ? ' · in folder' : ''}</div>
+          </div>
           <button class="file-row-rm" onclick="currentFiles.splice(${i},1);renderModal('ready')">✕</button>
         </div>`).join('') +
       `</div>`;
-      fileList += `<button onclick="triggerFileInput()" style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;margin-bottom:12px;font-weight:600">+ Add more PDFs</button>`;
+      if (currentTool === 'files-to-zip') {
+        fileList += `<div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+          <button onclick="triggerFileInput()" style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:4px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            + Add more files
+          </button>
+          <button onclick="triggerFolderInput()" style="font-size:12px;color:var(--teal);background:none;border:none;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:4px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            + Add folder
+          </button>
+        </div>`;
+      } else {
+        const addMoreLabel = ['pdf-to-jpg','pdf-to-png'].includes(currentTool) ? '+ Add more PDFs' :
+                             ['jpg-to-pdf','img-to-pdf'].includes(currentTool) ? '+ Add more images' : '+ Add more files';
+        fileList += `<button onclick="triggerFileInput()" style="font-size:12px;color:var(--red);background:none;border:none;cursor:pointer;margin-bottom:12px;font-weight:600">${addMoreLabel}</button>`;
+      }
     }
 
     const fileDisplay = (!tool.multi && currentFile) ? `
@@ -2204,7 +2268,10 @@ function renderModal(state) {
         <button class="file-row-rm" onclick="currentFile=null;renderModal('upload')">✕</button>
       </div>` : fileList;
 
-    const canGo = tool.multi ? currentFiles.length >= 2 : !!currentFile;
+    const singleFileMultiTools = ['files-to-zip','pdf-to-jpg','pdf-to-png','jpg-to-pdf','img-to-pdf'];
+    const canGo = tool.multi
+      ? (singleFileMultiTools.includes(currentTool) ? currentFiles.length >= 1 : currentFiles.length >= 2)
+      : !!currentFile;
 
     body.innerHTML = `
       ${fileDisplay}
@@ -2271,6 +2338,7 @@ function showError(msg) {
 
 // ─── FILE INPUT ─────────────────────────────────────────────────────────────
 function triggerFileInput() { document.getElementById('file-input').click(); }
+function triggerFolderInput() { document.getElementById('folder-input').click(); }
 
 function handleFileInputChange(e) {
   const files = Array.from(e.target.files);
@@ -2286,14 +2354,71 @@ function handleFileInputChange(e) {
   e.target.value = '';
 }
 
+function handleFolderInputChange(e) {
+  const files = Array.from(e.target.files);
+  if (!files.length) return;
+  // Files from a folder pick already have webkitRelativePath set
+  currentFiles = [...currentFiles, ...files];
+  renderModal('ready');
+  e.target.value = '';
+}
+
 function dzDragOver(e) { e.preventDefault(); document.getElementById('dropzone')?.classList.add('drag-over'); }
 function dzDragLeave() { document.getElementById('dropzone')?.classList.remove('drag-over'); }
-function dzDrop(e) {
+
+// Recursively read a FileSystemDirectoryEntry into a flat list of File objects
+async function readDirectoryEntry(entry, pathPrefix) {
+  return new Promise((resolve) => {
+    const reader = entry.createReader();
+    const results = [];
+    function readBatch() {
+      reader.readEntries(async (entries) => {
+        if (!entries.length) { resolve(results); return; }
+        for (const e of entries) {
+          if (e.isFile) {
+            await new Promise(r => e.file(f => {
+              // Attach relative path for ZIP folder structure
+              Object.defineProperty(f, 'webkitRelativePath', { value: pathPrefix + f.name, writable: false });
+              results.push(f);
+              r();
+            }));
+          } else if (e.isDirectory) {
+            const sub = await readDirectoryEntry(e, pathPrefix + e.name + '/');
+            results.push(...sub);
+          }
+        }
+        readBatch();
+      });
+    }
+    readBatch();
+  });
+}
+
+async function dzDrop(e) {
   e.preventDefault();
   document.getElementById('dropzone')?.classList.remove('drag-over');
+  const tool = TOOLS[currentTool];
+
+  if (currentTool === 'files-to-zip' && e.dataTransfer.items) {
+    // Use DataTransferItem API for folder support
+    const entries = Array.from(e.dataTransfer.items)
+      .map(item => item.webkitGetAsEntry ? item.webkitGetAsEntry() : null)
+      .filter(Boolean);
+    const collected = [];
+    for (const entry of entries) {
+      if (entry.isFile) {
+        await new Promise(r => entry.file(f => { collected.push(f); r(); }));
+      } else if (entry.isDirectory) {
+        const sub = await readDirectoryEntry(entry, entry.name + '/');
+        collected.push(...sub);
+      }
+    }
+    if (collected.length) { currentFiles = [...currentFiles, ...collected]; renderModal('ready'); }
+    return;
+  }
+
   const files = Array.from(e.dataTransfer.files);
   if (!files.length) return;
-  const tool = TOOLS[currentTool];
   if (tool && tool.multi) { currentFiles = [...currentFiles, ...files]; renderModal('ready'); }
   else { currentFile = files[0]; renderModal('ready'); }
 }
@@ -2309,6 +2434,43 @@ async function startConversion() {
   }
 }
 
+// ─── FILES → ZIP ─────────────────────────────────────────────────────────────
+async function convertFilesToZip() {
+  setProgress(5, 'Preparing ZIP…'); setLog('Reading files…');
+
+  // Dynamically load JSZip from CDN if not already loaded
+  if (!window.JSZip) {
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+      script.onload = resolve;
+      script.onerror = () => reject(new Error('Failed to load JSZip. Check your internet connection.'));
+      document.head.appendChild(script);
+    });
+  }
+
+  const zip = new JSZip();
+  const total = currentFiles.length;
+
+  for (let i = 0; i < total; i++) {
+    const file = currentFiles[i];
+    setProgress(10 + ((i / total) * 75), `Adding file ${i + 1} of ${total}…`);
+    // Use webkitRelativePath to preserve folder structure, fall back to flat name
+    const zipPath = file.webkitRelativePath || file.name;
+    setLog(zipPath);
+    const ab = await file.arrayBuffer();
+    zip.file(zipPath, ab);
+  }
+
+  setProgress(88, 'Compressing…'); setLog('Building ZIP archive…');
+  const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
+
+  setProgress(100, 'Done!');
+  resultBlob = blob;
+  resultName = 'archive.zip';
+  renderModal('done');
+}
+
 // ─── PDF.JS INIT ─────────────────────────────────────────────────────────────
 async function initPdfJs() {
   await waitForLib('pdfjsLib');
@@ -2322,120 +2484,189 @@ async function initPdfJs() {
 
 // ─── PDF → PNG ───────────────────────────────────────────────────────────────
 async function convertPdfToPng() {
-  setProgress(5,'Loading PDF…'); setLog('Initialising pdf.js…');
+  setProgress(5, 'Loading…'); setLog('Initialising pdf.js…');
   await initPdfJs();
-  const ab = await currentFile.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({data:ab}).promise;
-  const total = pdf.numPages;
-  setLog(`${total} page(s) found`);
-  const scale = [1,1.5,2,3][quality];
+  const scale = [1, 1.5, 2, 3][quality];
+  const files = currentFiles.length > 0 ? currentFiles : [currentFile];
+  const multiFile = files.length > 1;
 
-  if (total === 1) {
-    setProgress(30,'Rendering page…');
-    const page = await pdf.getPage(1);
-    const vp = page.getViewport({scale});
-    const canvas = document.createElement('canvas');
-    canvas.width = vp.width; canvas.height = vp.height;
-    await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-    setProgress(90,'Encoding PNG…');
-    const blob = await new Promise(r=>canvas.toBlob(r,'image/png'));
-    setProgress(100,'Done!');
-    resultBlob = blob; resultName = currentFile.name.replace('.pdf','') + '_page1.png';
-  } else {
+  async function pdfToPngBlobs(file, fileIdx) {
+    const ab = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: ab}).promise;
+    const pageCount = pdf.numPages;
     const blobs = [];
-    for (let i=1;i<=total;i++) {
-      setProgress(10+(i/total)*80,`Rendering page ${i}/${total}…`); setLog(`Page ${i} of ${total}`);
-      const page = await pdf.getPage(i);
+    for (let p = 1; p <= pageCount; p++) {
+      const overall = (fileIdx / files.length) + ((p / pageCount) / files.length);
+      setProgress(10 + overall * 78, `File ${fileIdx+1}/${files.length} · Page ${p}/${pageCount}…`);
+      setLog(file.name);
+      const page = await pdf.getPage(p);
       const vp = page.getViewport({scale});
       const canvas = document.createElement('canvas');
       canvas.width = vp.width; canvas.height = vp.height;
-      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-      blobs.push(await new Promise(r=>canvas.toBlob(r,'image/png')));
+      await page.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
+      blobs.push({ blob: await new Promise(r => canvas.toBlob(r, 'image/png')), page: p, total: pageCount });
     }
-    setProgress(92,'Stitching pages…');
-    const imgs = await Promise.all(blobs.map(b=>createImageBitmap(b)));
-    const H = imgs.reduce((h,i)=>h+i.height,0), W = Math.max(...imgs.map(i=>i.width));
-    const canvas = document.createElement('canvas'); canvas.width=W; canvas.height=H;
-    const ctx = canvas.getContext('2d'); let y=0;
-    for(const img of imgs){ctx.drawImage(img,0,y);y+=img.height;}
-    setProgress(99,'Encoding…');
-    resultBlob = await new Promise(r=>canvas.toBlob(r,'image/png'));
-    resultName = currentFile.name.replace('.pdf','')+'_all_pages.png';
+    return blobs;
   }
+
+  if (!multiFile) {
+    const entries = await pdfToPngBlobs(files[0], 0);
+    if (entries.length === 1) {
+      resultBlob = entries[0].blob;
+      resultName = files[0].name.replace('.pdf','') + '_page1.png';
+    } else {
+      setProgress(92, 'Stitching pages…');
+      const imgs = await Promise.all(entries.map(e => createImageBitmap(e.blob)));
+      const H = imgs.reduce((h, i) => h + i.height, 0), W = Math.max(...imgs.map(i => i.width));
+      const canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d'); let y = 0;
+      for (const img of imgs) { ctx.drawImage(img, 0, y); y += img.height; }
+      setProgress(99, 'Encoding…');
+      resultBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      resultName = files[0].name.replace('.pdf','') + '_all_pages.png';
+    }
+  } else {
+    if (!window.JSZip) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+        script.onload = resolve; script.onerror = () => reject(new Error('Failed to load JSZip.'));
+        document.head.appendChild(script);
+      });
+    }
+    const zip = new JSZip();
+    for (let fi = 0; fi < files.length; fi++) {
+      const entries = await pdfToPngBlobs(files[fi], fi);
+      const baseName = files[fi].name.replace(/\.pdf$/i, '');
+      if (entries.length === 1) {
+        zip.file(`${baseName}_page1.png`, await entries[0].blob.arrayBuffer());
+      } else {
+        for (const e of entries) {
+          zip.file(`${baseName}_page${String(e.page).padStart(3,'0')}.png`, await e.blob.arrayBuffer());
+        }
+      }
+    }
+    setProgress(92, 'Building ZIP…'); setLog('Compressing images…');
+    resultBlob = await zip.generateAsync({type:'blob', compression:'DEFLATE', compressionOptions:{level:4}});
+    resultName = 'pdf_to_png.zip';
+  }
+  setProgress(100, 'Done!');
   renderModal('done');
 }
 
 // ─── PDF → JPG ───────────────────────────────────────────────────────────────
 async function convertPdfToJpg() {
-  setProgress(5,'Loading PDF…'); setLog('Initialising pdf.js…');
+  setProgress(5, 'Loading…'); setLog('Initialising pdf.js…');
   await initPdfJs();
-  const ab = await currentFile.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({data:ab}).promise;
-  const total = pdf.numPages;
-  const scale = [1,1.5,2,3][quality];
+  const scale = [1, 1.5, 2, 3][quality];
+  const files = currentFiles.length > 0 ? currentFiles : [currentFile];
+  const multiFile = files.length > 1;
 
-  if (total === 1) {
-    const page = await pdf.getPage(1);
-    const vp = page.getViewport({scale});
-    const canvas = document.createElement('canvas');
-    canvas.width = vp.width; canvas.height = vp.height;
-    await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-    setProgress(90,'Encoding JPG…');
-    const blob = await new Promise(r=>canvas.toBlob(r,'image/jpeg',0.92));
-    setProgress(100,'Done!');
-    resultBlob = blob; resultName = currentFile.name.replace('.pdf','') + '_page1.jpg';
-  } else {
+  // Helper: render one PDF to an array of JPG blobs
+  async function pdfToJpgBlobs(file, fileIdx) {
+    const ab = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: ab}).promise;
+    const pageCount = pdf.numPages;
     const blobs = [];
-    for (let i=1;i<=total;i++) {
-      setProgress(10+(i/total)*80,`Rendering page ${i}/${total}…`);
-      const page = await pdf.getPage(i);
+    for (let p = 1; p <= pageCount; p++) {
+      const overall = (fileIdx / files.length) + ((p / pageCount) / files.length);
+      setProgress(10 + overall * 78, `File ${fileIdx+1}/${files.length} · Page ${p}/${pageCount}…`);
+      setLog(file.name);
+      const page = await pdf.getPage(p);
       const vp = page.getViewport({scale});
       const canvas = document.createElement('canvas');
-      canvas.width=vp.width; canvas.height=vp.height;
-      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
-      blobs.push(await new Promise(r=>canvas.toBlob(r,'image/jpeg',0.92)));
+      canvas.width = vp.width; canvas.height = vp.height;
+      await page.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
+      blobs.push({ blob: await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92)), page: p, total: pageCount, name: file.name });
     }
-    setProgress(92,'Combining pages…');
-    const imgs = await Promise.all(blobs.map(b=>createImageBitmap(b)));
-    const H = imgs.reduce((h,i)=>h+i.height,0), W = Math.max(...imgs.map(i=>i.width));
-    const canvas=document.createElement('canvas'); canvas.width=W; canvas.height=H;
-    const ctx=canvas.getContext('2d'); let y=0;
-    for(const img of imgs){ctx.drawImage(img,0,y);y+=img.height;}
-    resultBlob = await new Promise(r=>canvas.toBlob(r,'image/jpeg',0.92));
-    resultName = currentFile.name.replace('.pdf','')+'_all_pages.jpg';
+    return blobs;
   }
-  setProgress(100,'Done!');
+
+  if (!multiFile) {
+    // Single PDF — original behaviour: 1 page = 1 JPG, multiple pages = combined tall JPG
+    const entries = await pdfToJpgBlobs(files[0], 0);
+    if (entries.length === 1) {
+      resultBlob = entries[0].blob;
+      resultName = files[0].name.replace('.pdf','') + '_page1.jpg';
+    } else {
+      setProgress(92, 'Combining pages…');
+      const imgs = await Promise.all(entries.map(e => createImageBitmap(e.blob)));
+      const H = imgs.reduce((h, i) => h + i.height, 0), W = Math.max(...imgs.map(i => i.width));
+      const canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d'); let y = 0;
+      for (const img of imgs) { ctx.drawImage(img, 0, y); y += img.height; }
+      resultBlob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+      resultName = files[0].name.replace('.pdf','') + '_all_pages.jpg';
+    }
+  } else {
+    // Multiple PDFs — output a ZIP of individual JPG files
+    if (!window.JSZip) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
+        script.onload = resolve; script.onerror = () => reject(new Error('Failed to load JSZip.'));
+        document.head.appendChild(script);
+      });
+    }
+    const zip = new JSZip();
+    for (let fi = 0; fi < files.length; fi++) {
+      const entries = await pdfToJpgBlobs(files[fi], fi);
+      const baseName = files[fi].name.replace(/\.pdf$/i, '');
+      if (entries.length === 1) {
+        zip.file(`${baseName}_page1.jpg`, await entries[0].blob.arrayBuffer());
+      } else {
+        for (const e of entries) {
+          zip.file(`${baseName}_page${String(e.page).padStart(3,'0')}.jpg`, await e.blob.arrayBuffer());
+        }
+      }
+    }
+    setProgress(92, 'Building ZIP…'); setLog('Compressing images…');
+    resultBlob = await zip.generateAsync({type:'blob', compression:'DEFLATE', compressionOptions:{level:4}});
+    resultName = 'pdf_to_jpg.zip';
+  }
+  setProgress(100, 'Done!');
   renderModal('done');
 }
 
 // ─── Image → PDF ─────────────────────────────────────────────────────────────
 async function convertImageToPdf() {
-  setProgress(10,'Loading image…'); setLog('Reading file…');
   await waitForLib('PDFLib');
-  const ab = await currentFile.arrayBuffer();
-  setProgress(30,'Creating PDF…');
   const pdfDoc = await PDFLib.PDFDocument.create();
-  const ext = currentFile.name.split('.').pop().toLowerCase();
-  let imageEmbed;
-  if (ext==='jpg'||ext==='jpeg') {
-    imageEmbed = await pdfDoc.embedJpg(ab);
-  } else {
-    setLog('Converting to PNG format…');
-    const blob = new Blob([ab],{type:currentFile.type});
-    const bmp = await createImageBitmap(blob);
-    const cv = document.createElement('canvas'); cv.width=bmp.width; cv.height=bmp.height;
-    cv.getContext('2d').drawImage(bmp,0,0);
-    const pngBlob = await new Promise(r=>cv.toBlob(r,'image/png'));
-    imageEmbed = await pdfDoc.embedPng(await pngBlob.arrayBuffer());
+
+  // Support both single-file (legacy) and multi-file modes
+  const files = currentFiles.length > 0 ? currentFiles : [currentFile];
+  const total = files.length;
+
+  for (let i = 0; i < total; i++) {
+    const file = files[i];
+    setProgress(10 + ((i / total) * 75), `Embedding image ${i + 1} of ${total}…`);
+    setLog(file.name);
+    const ab = await file.arrayBuffer();
+    const ext = file.name.split('.').pop().toLowerCase();
+    let imageEmbed;
+    if (ext === 'jpg' || ext === 'jpeg') {
+      imageEmbed = await pdfDoc.embedJpg(ab);
+    } else {
+      // Convert non-JPG to PNG via canvas for pdf-lib compatibility
+      const blob = new Blob([ab], {type: file.type});
+      const bmp = await createImageBitmap(blob);
+      const cv = document.createElement('canvas');
+      cv.width = bmp.width; cv.height = bmp.height;
+      cv.getContext('2d').drawImage(bmp, 0, 0);
+      const pngBlob = await new Promise(r => cv.toBlob(r, 'image/png'));
+      imageEmbed = await pdfDoc.embedPng(await pngBlob.arrayBuffer());
+    }
+    const page = pdfDoc.addPage([imageEmbed.width, imageEmbed.height]);
+    page.drawImage(imageEmbed, {x:0, y:0, width:imageEmbed.width, height:imageEmbed.height});
   }
-  setProgress(65,'Building PDF page…');
-  const page = pdfDoc.addPage([imageEmbed.width, imageEmbed.height]);
-  page.drawImage(imageEmbed,{x:0,y:0,width:imageEmbed.width,height:imageEmbed.height});
-  setProgress(90,'Saving PDF…');
+
+  setProgress(90, 'Saving PDF…'); setLog('Writing PDF file…');
   const bytes = await pdfDoc.save();
-  setProgress(100,'Done!');
-  resultBlob = new Blob([bytes],{type:'application/pdf'});
-  resultName = currentFile.name.replace(/\.[^.]+$/,'')+'_converted.pdf';
+  setProgress(100, 'Done!');
+  resultBlob = new Blob([bytes], {type: 'application/pdf'});
+  // Name based on first file if multiple
+  const baseName = files[0].name.replace(/\.[^.]+$/, '');
+  resultName = total > 1 ? `${baseName}_and_${total-1}_more_converted.pdf` : `${baseName}_converted.pdf`;
   renderModal('done');
 }
 
