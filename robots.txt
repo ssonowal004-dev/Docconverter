@@ -1,0 +1,7 @@
+# robots.txt for https://pdfconverterpro.in
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pdfconverterpro.in/sitemap.xml
